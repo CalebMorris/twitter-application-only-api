@@ -11,6 +11,14 @@ function buildQuery(options) {
   return results.join('&');
 }
 
+function TwitterApiError(message, body) {
+  this.name = 'TwitterApiError';
+  this.message = message;
+  this.body = body;
+  this.statck = new Error().stack;
+}
+TwitterApiError.prototype = Error.prototype;
+
 function Twitter(apiKey, apiSecret, cb) {
   if (typeof apiKey !== 'string') {
     throw new TypeError('apiKey isn\'t a string');
@@ -35,7 +43,7 @@ function Twitter(apiKey, apiSecret, cb) {
     body    : 'grant_type=client_credentials'
   };
 
-  var callback = function callback(error, response, body) {
+  request(options, function(error, response, body) {
     if (error) {
       throw error;
     }
@@ -46,14 +54,12 @@ function Twitter(apiKey, apiSecret, cb) {
       }
 
       self.token = info.access_token;
-      cb(self);
+      cb(null, self);
     }
     else {
-      throw new Error('The status code \'' + response.statusCode + '\' is not 200');
+      cb(new TwitterApiError('There was a problem retrieving the bearer token', JSON.parse(body)));
     }
-  };
-
-  request(options, callback);
+  });
 }
 
 var optionsSchema = Joi.object().keys({
