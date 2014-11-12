@@ -1,1 +1,1 @@
-module.exports = require('./twitterAppApi.js');
+module.exports = require('./lib/twitterAppApi.js');
