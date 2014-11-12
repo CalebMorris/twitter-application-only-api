@@ -2,6 +2,7 @@
 
 var request = require('request');
 var Joi     = require('joi');
+var Promise = require('bluebird');
 
 function buildQuery(options) {
   var results = [];
@@ -19,7 +20,7 @@ function TwitterApiError(message, body) {
 }
 TwitterApiError.prototype = Error.prototype;
 
-function Twitter(apiKey, apiSecret, cb) {
+function Twitter(apiKey, apiSecret) {
   if (typeof apiKey !== 'string') {
     throw new TypeError('apiKey isn\'t a string');
   }
@@ -27,9 +28,14 @@ function Twitter(apiKey, apiSecret, cb) {
     throw new TypeError('apiSecret isn\'t a string');
   }
 
-  var credentials = new Buffer(apiKey + ':' + apiSecret).toString('base64');
+  this.apiKey = apiKey;
+  this.apiSecret = apiSecret;
 
-  var self = this;
+  return this;
+}
+
+Twitter.prototype.authenticate = function() {
+  var credentials = new Buffer(this.apiKey + ':' + this.apiSecret).toString('base64');
 
   var options = {
     url     : 'https://api.twitter.com/oauth2/token',
@@ -43,23 +49,26 @@ function Twitter(apiKey, apiSecret, cb) {
     body    : 'grant_type=client_credentials'
   };
 
-  request(options, function(error, response, body) {
-    if (error) {
-      throw error;
-    }
-    if (response.statusCode === 200) {
-      var info = JSON.parse(body);
-      if (info.token_type !== 'bearer') {
-        throw new Error('Response token was of the wrong type: ' + info.token_type);
+  return new Promise(function(resolve, reject) {
+    request(options, function(error, response, body) {
+      if (error) {
+        throw error;
       }
+      if (response.statusCode === 200) {
+        var info = JSON.parse(body);
+        if (info.token_type !== 'bearer') {
+          throw new Error('Response token was of the wrong type: ' + info.token_type);
+        }
 
-      self.token = info.access_token;
-      cb(null, self);
-    }
-    else {
-      cb(new TwitterApiError('There was a problem retrieving the bearer token', JSON.parse(body)));
-    }
-  });
+        this.token = info.access_token;
+        resolve(this);
+      }
+      else {
+        reject(new TwitterApiError('There was a problem retrieving the bearer token', JSON.parse(body)));
+      }
+    }.bind(this));
+  }.bind(this));
+
 }
 
 var optionsSchema = Joi.object().keys({
@@ -74,42 +83,41 @@ var optionsSchema = Joi.object().keys({
   include_rts         : Joi.boolean()
 }).or('screen_name', 'user_id');
 
-Twitter.prototype.getTweets = function(options, callback) {
-  var token = this.token;
-  if (typeof token === 'undefined') {
-    throw new Error('This was not initiated correctly.');
-  }
-  if (options == null || typeof options !== 'object') {
-    throw new TypeError('\'options\' must be an object.');
-  }
-  if (typeof callback !== 'function') {
-    throw new TypeError('\'callback\' must ba a function');
-  }
-
-  var requestCallback = function(err, res, body) {
-    if (err) {
-      throw err;
+Twitter.prototype.getTweets = function(options) {
+  return new Promise(function(resolve, reject) {
+    var token = this.token;
+    if (typeof token === 'undefined') {
+      throw new Error('`this` was not initiated correctly.');
+    }
+    if (options == null || typeof options !== 'object') {
+      throw new TypeError('\'options\' must be an object.');
     }
 
-    callback(JSON.parse(body));
-  };
+    var requestCallback = function(err, res, body) {
+      if (err) {
+        return reject(err);
+      }
 
-  Joi.validate(options, optionsSchema, function(err, value) {
-    if (err) {
-      throw err;
-    }
-
-    var requestOptions = {
-      url     : 'https://api.twitter.com/1.1/statuses/user_timeline.json?' + buildQuery(options),
-      method  : 'GET',
-      headers : {
-        'Authorization'  : 'Bearer ' + token,
-        'User-Agent'     : 'request'
-      },
+      resolve(JSON.parse(body));
     };
 
-    request(requestOptions, requestCallback);
-  });
+    Joi.validate(options, optionsSchema, function(err, value) {
+      if (err) {
+        throw err;
+      }
+
+      var requestOptions = {
+        url     : 'https://api.twitter.com/1.1/statuses/user_timeline.json?' + buildQuery(options),
+        method  : 'GET',
+        headers : {
+          'Authorization'  : 'Bearer ' + token,
+          'User-Agent'     : 'request'
+        },
+      };
+
+      request(requestOptions, requestCallback);
+    });
+  }.bind(this));
 };
 
 module.exports = Twitter;

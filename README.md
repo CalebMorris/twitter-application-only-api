@@ -8,12 +8,19 @@ This module handles authentication and abstracts the API endpoints to Javascript
 ```javascript
 var Twitter  = require('twitter-app-api');
 
-new Twitter(config.apiKey, config.apiSecret, function (handler) {
-  handler.getTweets({ screen_name:'twitterapi', count:2 }, function(tweets) {
+var twit = Twitter(config.apiKey, config.apiSecret);
+
+twit.authenticate()
+.then(function() {
+  console.log('Authenticated');
+
+  twit.getTweets({ screen_name:'twitterapi', count:2 })
+  .then(function(tweets) {
     tweets.forEach(function(twit) {
       console.log(twit.text);
     })
   });
 });
+
 
 ```
