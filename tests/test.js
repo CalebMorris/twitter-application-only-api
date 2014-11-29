@@ -143,3 +143,87 @@ describe('authenticate', function() {
   });
 });
 
+describe('getTweets', function() {
+  var postStub;
+
+  beforeEach(function(done) {
+    postStub = sinon.stub(request, 'post', function(options, callback) {
+      callback(null, { statusCode : 200 },
+        '{ "token_type" : "bearer", "access_token" : "token" }');
+    });
+    done();
+  });
+
+  afterEach(function(done) {
+    request.post.restore();
+    request.get.restore();
+    done();
+  });
+
+  it('fails validation', function(done) {
+    var getStub = sinon.stub(request, 'get', function(options, callback) {
+      callback(null, null, null);
+    });
+
+    var twit = new (injectTwitterStubs({
+      get  : getStub,
+      post : postStub,
+    }))('apiKey', 'apiSecret');
+    twit.authenticate()
+    .then(function() {
+      return twit.getTweets({})
+      .then(done.bind(null, (new Error('getTweets should throw an error when unauthorized'))));
+    })
+    .catch(function(err) {
+      expect(err).to.be.instanceOf(Error);
+      expect(err.message).to.contain('must contain');
+      expect(getStub.callCount).to.equal(0);
+      done();
+    })
+    .catch(done);
+  });
+
+  it('get non 200 response', function(done) {
+    var getStub = sinon.stub(request, 'get', function(options, callback) {
+      callback(null, { statusCode : 500 }, '');
+    });
+
+    var twit = new (injectTwitterStubs({
+      get  : getStub,
+      post : postStub,
+    }))('apiKey', 'apiSecret');
+    twit.authenticate()
+    .then(function() {
+      return twit.getTweets({ screen_name : 'test' });
+    })
+    .then(done.bind(null, new Error('getTweets should have failed')))
+    .catch(function(err) {
+      expect(err).to.be.instanceOf(Error);
+      expect(err.message).to.contain('tweets');
+      expect(getStub.callCount).to.equal(1);
+      done();
+    })
+    .catch(done);
+  });
+
+  it('success', function(done) {
+    var getStub = sinon.stub(request, 'get', function(options, callback) {
+      callback(null, { statusCode : 200 }, '');
+    });
+
+    var twit = new (injectTwitterStubs({
+      get  : getStub,
+      post : postStub,
+    }))('apiKey', 'apiSecret');
+    twit.authenticate()
+    .then(function() {
+      return twit.getTweets({ screen_name : 'test' });
+    })
+    .then(function() {
+      expect(getStub.callCount).to.equal(1);
+      done();
+    })
+    .catch(done);
+  });
+});
+
