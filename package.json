@@ -29,9 +29,10 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "chai": "^1.10.0",
+    "istanbul": "^0.3.2",
     "mocha": "^2.0.1",
     "nodemon": "^1.2.1",
-    "sinon": "~1.12.1",
-    "proxyquire": "~1.1.0"
+    "proxyquire": "~1.1.0",
+    "sinon": "~1.12.1"
   }
 }
