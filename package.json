@@ -12,7 +12,8 @@
     "url": "https://github.com/CalebMorris/twitter-app-api/issues"
   },
   "scripts": {
-    "test": "mocha tests/**/*"
+    "test": "mocha tests/**/*",
+    "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'"
   },
   "author": {
     "name": "Caleb Morris",
@@ -28,6 +29,7 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "chai": "^1.10.0",
-    "mocha": "^2.0.1"
+    "mocha": "^2.0.1",
+    "nodemon": "^1.2.1"
   }
 }
