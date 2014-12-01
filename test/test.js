@@ -48,10 +48,10 @@ describe('Unauthorized State', function() {
     twit = undefined;
   });
 
-  it('getTweets', function(done) {
-    twit.getTweets({})
+  it('timeline', function(done) {
+    twit.statuses.timeline({})
     .then(function() {
-      done(new Error('getTweets should throw an error when unauthorized'));
+      done(new Error('timeline should throw an error when unauthorized'));
     })
     .catch(function(err) {
       expect(err).to.be.a('boolean');
@@ -143,7 +143,7 @@ describe('authenticate', function() {
   });
 });
 
-describe('getTweets', function() {
+describe('timeline', function() {
   var postStub;
 
   beforeEach(function(done) {
@@ -171,8 +171,8 @@ describe('getTweets', function() {
     }))('apiKey', 'apiSecret');
     twit.authenticate()
     .then(function() {
-      return twit.getTweets({})
-      .then(done.bind(null, (new Error('getTweets should throw an error when unauthorized'))));
+      return twit.statuses.timeline({})
+      .then(done.bind(null, (new Error('timeline should throw an error when unauthorized'))));
     })
     .catch(function(err) {
       expect(err).to.be.instanceOf(Error);
@@ -194,12 +194,13 @@ describe('getTweets', function() {
     }))('apiKey', 'apiSecret');
     twit.authenticate()
     .then(function() {
-      return twit.getTweets({ screen_name : 'test' });
+      return twit.statuses.timeline({ screen_name : 'test' });
     })
-    .then(done.bind(null, new Error('getTweets should have failed')))
+    .then(done.bind(null, new Error('timeline should have failed')))
     .catch(function(err) {
+      console.log('err', err);
       expect(err).to.be.instanceOf(Error);
-      expect(err.message).to.contain('tweets');
+      expect(err.message).to.contain('timeline');
       expect(getStub.callCount).to.equal(1);
       done();
     })
@@ -217,7 +218,7 @@ describe('getTweets', function() {
     }))('apiKey', 'apiSecret');
     twit.authenticate()
     .then(function() {
-      return twit.getTweets({ screen_name : 'test' });
+      return twit.statuses.timeline({ screen_name : 'test' });
     })
     .then(function() {
       expect(getStub.callCount).to.equal(1);
