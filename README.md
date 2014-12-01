@@ -16,7 +16,7 @@ twit.authenticate()
 .then(function() {
   console.log('Authenticated');
 
-  twit.getTweets({ screen_name:'twitterapi', count:2 })
+  twit.statuses.timeline({ screen_name:'twitterapi', count:2 })
   .then(function(tweets) {
     tweets.forEach(function(twit) {
       console.log(twit.text);
