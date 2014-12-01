@@ -7,10 +7,10 @@ This is done by using a different [authentication](https://dev.twitter.com/docs/
 This module handles authentication and abstracts the API endpoints to Javascript methods.  
 
 ## Support API Paths
-1. /friends
-2. /followers
-3. /search
-4. /statuses/timeline
+1. /friends/ids            -> .friends(options)
+2. /followers/ids          -> .followers(options)
+3. /search                 -> .search(options)
+4. /statuses/user_timeline -> .statuses.timeline(options)
 
 ## Example
 ```javascript
@@ -32,3 +32,46 @@ twit.authenticate()
 
 
 ```
+
+## Currently Unsupport API Paths
+- /favorites/list
+- /followers/list
+- /friendships/show
+- /friends/list
+- /geo/id/:place_id
+- /geo/reverse_geocode
+- /geo/search
+- /geo/similar_places
+- /help/configuration
+- /help/languages
+- /help/privacy
+- /help/tos
+- /lists/list
+- /lists/members
+- /lists/memberships
+- /lists/members/show
+- /lists/ownerships
+- /lists/show
+- /lists/statuses
+- /lists/subscribers
+- /lists/subscribers/show
+- /lists/subscriptions
+- /search/tweets
+- /statuses/lookup
+- /statuses/oembed
+- /statuses/retweeters/ids
+- /statuses/retweets/:id
+- /statuses/show/:id
+- /trends/available
+- /trends/closest
+- /trends/place
+- /users/contributees
+- /users/contributors
+- /users/lookup
+- /users/profile_banner
+- /users/search
+- /users/show
+- /users/suggestions
+- /users/suggestions/:slug
+- /users/suggestions/:slug/members
+
