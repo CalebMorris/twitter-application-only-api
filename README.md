@@ -11,6 +11,7 @@ This module handles authentication and abstracts the API endpoints to Javascript
 - /followers/ids          -> .followers(options)
 - /search                 -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
+- /statuses/oembed        -> .statuses.oembed(options) // format : json or xml
 - /statuses/retweeters/ids-> .statuses.retweeters(options)
 - /statuses/retweets/:id  -> .statuses.retweets(options)
 - /statuses/show/:id      -> .statuses.show(options)
@@ -61,7 +62,6 @@ twit.authenticate()
 - /lists/subscribers/show
 - /lists/subscriptions
 - /search/tweets
-- /statuses/oembed
 - /trends/available
 - /trends/closest
 - /trends/place
