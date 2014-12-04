@@ -7,10 +7,11 @@ This is done by using a different [authentication](https://dev.twitter.com/docs/
 This module handles authentication and abstracts the API endpoints to Javascript methods.  
 
 ## Support API Paths
-1. /friends/ids            -> .friends(options)
-2. /followers/ids          -> .followers(options)
-3. /search                 -> .search(options)
-4. /statuses/user_timeline -> .statuses.timeline(options)
+- /friends/ids            -> .friends(options)
+- /followers/ids          -> .followers(options)
+- /search                 -> .search(options)
+- /statuses/user_timeline -> .statuses.timeline(options)
+- /statuses/retweets/:id
 
 ## Example
 ```javascript
@@ -60,7 +61,6 @@ twit.authenticate()
 - /statuses/lookup
 - /statuses/oembed
 - /statuses/retweeters/ids
-- /statuses/retweets/:id
 - /statuses/show/:id
 - /trends/available
 - /trends/closest
