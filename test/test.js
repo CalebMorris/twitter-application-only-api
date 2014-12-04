@@ -198,7 +198,6 @@ describe('timeline', function() {
     })
     .then(done.bind(null, new Error('timeline should have failed')))
     .catch(function(err) {
-      console.log('err', err);
       expect(err).to.be.instanceOf(Error);
       expect(err.message).to.contain('timeline');
       expect(getStub.callCount).to.equal(1);
