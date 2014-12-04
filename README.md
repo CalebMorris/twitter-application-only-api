@@ -11,7 +11,8 @@ This module handles authentication and abstracts the API endpoints to Javascript
 - /followers/ids          -> .followers(options)
 - /search                 -> .search(options)
 - /statuses/user_timeline -> .statuses.timeline(options)
-- /statuses/retweets/:id
+- /statuses/retweets/:id  -> .statuses.retweets(options)
+- /statuses/show/:id      -> .statuses.show(options)
 
 ## Example
 ```javascript
@@ -61,7 +62,6 @@ twit.authenticate()
 - /statuses/lookup
 - /statuses/oembed
 - /statuses/retweeters/ids
-- /statuses/show/:id
 - /trends/available
 - /trends/closest
 - /trends/place
