@@ -7,7 +7,13 @@ This is done by using a different [authentication](https://dev.twitter.com/docs/
 This module handles authentication and abstracts the API endpoints to Javascript methods.  
 
 ## Support API Paths
+- /help/configuration     -> .help.configuration()
+- /help/languages         -> .help.languages()
+- /help/privacy           -> .help.privacy()
+- /help/tos               -> .help.tos()
+- /favorites/list         -> .favorites(options)
 - /friends/ids            -> .friends(options)
+- /friendships/show       -> .friendships(options)
 - /followers/ids          -> .followers(options)
 - /search                 -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
@@ -39,18 +45,8 @@ twit.authenticate()
 ```
 
 ## Currently Unsupport API Paths
-- /favorites/list
 - /followers/list
-- /friendships/show
 - /friends/list
-- /geo/id/:place_id
-- /geo/reverse_geocode
-- /geo/search
-- /geo/similar_places
-- /help/configuration
-- /help/languages
-- /help/privacy
-- /help/tos
 - /lists/list
 - /lists/members
 - /lists/memberships
