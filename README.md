@@ -9,6 +9,7 @@ This module handles authentication and abstracts the API endpoints to Javascript
 ## Support API Paths
 - /favorites/list         -> .favorites(options)
 - /friends/ids            -> .friends(options)
+- /friendships/show       -> .friendships(options)
 - /followers/ids          -> .followers(options)
 - /search                 -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
@@ -41,7 +42,6 @@ twit.authenticate()
 
 ## Currently Unsupport API Paths
 - /followers/list
-- /friendships/show
 - /friends/list
 - /geo/id/:place_id
 - /geo/reverse_geocode
