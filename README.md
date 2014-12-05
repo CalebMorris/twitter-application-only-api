@@ -43,10 +43,6 @@ twit.authenticate()
 ## Currently Unsupport API Paths
 - /followers/list
 - /friends/list
-- /geo/id/:place_id
-- /geo/reverse_geocode
-- /geo/search
-- /geo/similar_places
 - /help/configuration
 - /help/languages
 - /help/privacy
