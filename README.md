@@ -7,6 +7,10 @@ This is done by using a different [authentication](https://dev.twitter.com/docs/
 This module handles authentication and abstracts the API endpoints to Javascript methods.  
 
 ## Support API Paths
+- /help/configuration     -> .help.configuration()
+- /help/languages         -> .help.languages()
+- /help/privacy           -> .help.privacy()
+- /help/tos               -> .help.tos()
 - /favorites/list         -> .favorites(options)
 - /friends/ids            -> .friends(options)
 - /friendships/show       -> .friendships(options)
@@ -43,10 +47,6 @@ twit.authenticate()
 ## Currently Unsupport API Paths
 - /followers/list
 - /friends/list
-- /help/configuration
-- /help/languages
-- /help/privacy
-- /help/tos
 - /lists/list
 - /lists/members
 - /lists/memberships
