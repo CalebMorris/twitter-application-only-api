@@ -62,12 +62,15 @@ twit.authenticate()
 - /lists/subscribers/show
 - /lists/subscriptions
 - /search/tweets
-- /users/contributees
-- /users/contributors
 - /users/lookup
 - /users/profile_banner
-- /users/search
 - /users/suggestions
 - /users/suggestions/:slug
 - /users/suggestions/:slug/members
 
+## Requires User Authentication
+
+- /geo/*
+- /users/contributees
+- /users/contributors
+- /users/search
