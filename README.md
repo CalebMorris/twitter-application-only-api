@@ -63,7 +63,6 @@ twit.authenticate()
 - /lists/subscribers/show
 - /lists/subscriptions
 - /search/tweets
-- /users/profile_banner
 - /users/suggestions
 - /users/suggestions/:slug
 - /users/suggestions/:slug/members
@@ -73,4 +72,5 @@ twit.authenticate()
 - /geo/*
 - /users/contributees
 - /users/contributors
+- /users/profile_banner
 - /users/search
