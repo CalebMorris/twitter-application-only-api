@@ -25,6 +25,7 @@ This module handles authentication and abstracts the API endpoints to Javascript
 - /trends/available       -> .trends.available()
 - /trends/closest         -> .trends.closest()
 - /trends/place           -> .trends.place(options)
+- /users/show             -> .users.show(options)
 
 ## Example
 ```javascript
@@ -66,7 +67,6 @@ twit.authenticate()
 - /users/lookup
 - /users/profile_banner
 - /users/search
-- /users/show
 - /users/suggestions
 - /users/suggestions/:slug
 - /users/suggestions/:slug/members
