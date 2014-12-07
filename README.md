@@ -37,6 +37,7 @@ twit.authenticate()
 - /followers/ids          -> .followers(options)
 - /lists/list             -> .lists.list(options)
 - /lists/members          -> .lists.members(options)
+- /lists/members/show     -> .lists.members().show(options)
 - /search                 -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
 - /statuses/oembed        -> .statuses.oembed(options) // format : json or xml
@@ -57,7 +58,6 @@ twit.authenticate()
 - /followers/list
 - /friends/list
 - /lists/memberships
-- /lists/members/show
 - /lists/ownerships
 - /lists/show
 - /lists/statuses
