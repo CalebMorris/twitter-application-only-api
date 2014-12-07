@@ -47,7 +47,7 @@ twit.authenticate()
 - /lists/subscribers      -> .lists.subscribers(options)
 - /lists/subscribers/show -> .lists.subscribers().show(options)
 - /lists/subscriptions    -> .lists.subscriptions(options)
-- /search                 -> .search(options)
+- /search/tweets          -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
 - /statuses/oembed        -> .statuses.oembed(options) // format : json or xml
 - /statuses/retweeters/ids-> .statuses.retweeters(options)
@@ -62,9 +62,6 @@ twit.authenticate()
 - /users/suggestions      -> .users.suggestions(options)
 - /users/suggestions/:slug-> .users.suggestions(slug)
 - /users/suggestions/:slug/members -> .users.suggestions(slug).members()
-
-## Currently Unsupport API Paths
-- /search/tweets
 
 ## Requires User Authentication
 
