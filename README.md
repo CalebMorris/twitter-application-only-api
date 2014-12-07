@@ -42,6 +42,7 @@ twit.authenticate()
 - /lists/ownerships       -> .lists.ownerships(options)
 - /lists/show             -> .lists.show(options)
 - /lists/statuses         -> .lists.statuses(options)
+- /lists/subscribers      -> .lists.subscribers(options)
 - /lists/subscriptions    -> .lists.subscriptions(options)
 - /search                 -> .search(options)
 - /statuses/lookup        -> .statuses.lookup(options)
@@ -62,7 +63,6 @@ twit.authenticate()
 ## Currently Unsupport API Paths
 - /followers/list
 - /friends/list
-- /lists/subscribers
 - /lists/subscribers/show
 - /search/tweets
 
