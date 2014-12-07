@@ -1,6 +1,6 @@
 {
   "name": "twitter-app-api",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Node interropt for application-only Twitter API",
   "main": "index.js",
   "homepage": "https://github.com/CalebMorris/twitter-application-only-api",
