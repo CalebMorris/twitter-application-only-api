@@ -78,19 +78,28 @@ twit.authorize()
 
 ####`.help.configuration()`
 
-####`.help.configuration()`
+Calls path `/help/configuration`
 
 ####`.help.languages()`
 
+Calls path `/help/languages`
+
 ####`.help.privacy()`
 
+Calls path `/help/privacy`
+
 ####`.help.tos()`
+
+Calls path `/help/privacy`
+
 
 ##Favorites
 
 ####`.favorites(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/favorites/list`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -100,11 +109,14 @@ Either `screen_name` or `user_id` is required
   - `max_id`
   - `include_entities`
 
+
 ##Friends
 
 ####`.friends.ids(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/friends/ids`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -115,7 +127,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.friends.list(options)`
 
-Either `screen_name` or `user_id` is required
+Either `screen_name` or `user_id` is **required**
+
+Calls path `/friends/list`
 
 - `options`
   - `screen_name`
@@ -125,15 +139,20 @@ Either `screen_name` or `user_id` is required
   - `skip_status`
   - `include_user_entities`
 
+
 ##Friendships
 
 ####`.friendships(options)`
+
+Calls path `/friendships/show`
 
 ##Followers
 
 ####`.followers.ids(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/followers/ids`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -144,7 +163,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.followers.list(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/followers/list`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -154,11 +175,14 @@ Either `screen_name` or `user_id` is required
   - `skip_status`
   - `include_user_entities`
 
+
 ##Lists
 
 ####`.lists.list(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/lists/list`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -167,7 +191,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.lists.memberships(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/lists/memberships`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -178,11 +204,17 @@ Either `screen_name` or `user_id` is required
 
 ####`.lists.members(options)`
 
+Calls path `/lists/members`
+
 ####`.lists.members().show(options)`
+
+Calls path `/lists/show`
 
 ####`.lists.ownerships(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/lists/ownerships`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -192,29 +224,53 @@ Either `screen_name` or `user_id` is required
 
 ####`.lists.show(options)`
 
+Calls path `/lists/show`
+
 ####`.lists.statuses(options)`
+
+Calls path `/lists/statuses`
 
 ####`.lists.subscribers(options)`
 
+Calls path `/lists/subscribers`
+
 ####`.lists.subscribers().show(options)`
 
+Calls path `/lists/subscribers/show`
+
 ####`.lists.subscriptions(options)`
+
+Calls path `/lists/subscriptions`
+
 
 ##Search
 
 ####`.search(options)`
 
+Calls path `/search/tweets`
+
+
 ##Statuses
 
 ####`.statuses.lookup(options)`
 
+Calls path `/statuses/lookup`
+
 ####`.statuses.oembed(options)`
+
+Calls path `/statuses/oembed`
 
 ####`.statuses.retweeters(options)`
 
+Calls path `/statuses/retweeters`
+
 ####`.statuses.retweets(options)`
 
+Calls path `/statuses/retweets`
+
 ####`.statuses.show(options)`
+
+Calls path `/statuses/show`
 
 - `options`
   - `q`
@@ -228,7 +284,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.statuses.timeline(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/statuses/timeline`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -241,13 +299,20 @@ Either `screen_name` or `user_id` is required
   - `contributor_details`
   - `include_rts`
 
+
 ##Trends
 
 ####`.trends.available()`
 
+Calls path `/trends/available`
+
 ####`.trends.closest()`
 
+Calls path `/trends/closest`
+
 ####`.trends.place(options)`
+
+Calls path `/trends/place`
 
 - `options`
   - `id`
@@ -257,7 +322,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.users.lookup(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/users/lookup`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -266,7 +333,9 @@ Either `screen_name` or `user_id` is required
 
 ####`.users.show(options)`
 
-Either `screen_name` or `user_id` is required
+Calls path `/users/show`
+
+Either `screen_name` or `user_id` is **required**
 
 - `options`
   - `screen_name`
@@ -275,14 +344,20 @@ Either `screen_name` or `user_id` is required
 
 ####`.users.suggestions(options)`
 
+Calls path `/users/suggestions`
+
 - `options`
   - `lang`
 
 ####`.users.suggestions(slug)`
 
+Calls path `/users/suggestions/:slug`
+
 - `slug`
 
 ####`.users.suggestions(slug).members()`
+
+Calls path `/users/suggestions/:slug/members`
 
 - `options`
   - `slug` required
