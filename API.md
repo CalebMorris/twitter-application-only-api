@@ -90,11 +90,40 @@ twit.authorize()
 
 ####`.favorites(options)`
 
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `since_id`
+  - `max_id`
+  - `include_entities`
+
 ##Friends
 
 ####`.friends.ids(options)`
 
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
+  - `stringify_ids`
+
 ####`.friends.list(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
+  - `skip_status`
+  - `include_user_entities`
 
 ##Friendships
 
@@ -104,19 +133,62 @@ twit.authorize()
 
 ####`.followers.ids(options)`
 
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
+  - `stringify_ids`
+
 ####`.followers.list(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
+  - `skip_status`
+  - `include_user_entities`
 
 ##Lists
 
 ####`.lists.list(options)`
 
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `reverse`
+
 ####`.lists.memberships(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
+  - `filter_to_owned_lists`
 
 ####`.lists.members(options)`
 
 ####`.lists.members().show(options)`
 
 ####`.lists.ownerships(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `count`
+  - `cursor`
 
 ####`.lists.show(options)`
 
@@ -144,7 +216,30 @@ twit.authorize()
 
 ####`.statuses.show(options)`
 
+- `options`
+  - `q`
+  - `result_type`
+  - `geocode`
+  - `lang`
+  - `count`
+  - `until`
+  - `since_id`
+  - `max_id`
+
 ####`.statuses.timeline(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `since_id`
+  - `count`
+  - `max_id`
+  - `trim_user`
+  - `exclude_replies`
+  - `contributor_details`
+  - `include_rts`
 
 ##Trends
 
@@ -154,14 +249,40 @@ twit.authorize()
 
 ####`.trends.place(options)`
 
+- `options`
+  - `id`
+  - `exclude`
+
 ##Users
 
 ####`.users.lookup(options)`
 
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `include_entities`
+
 ####`.users.show(options)`
+
+Either `screen_name` or `user_id` is required
+
+- `options`
+  - `screen_name`
+  - `user_id`
+  - `include_entities`
 
 ####`.users.suggestions(options)`
 
+- `options`
+  - `lang`
+
 ####`.users.suggestions(slug)`
 
+- `slug`
+
 ####`.users.suggestions(slug).members()`
+
+- `options`
+  - `slug` required
