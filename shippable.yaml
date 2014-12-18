@@ -2,7 +2,9 @@ language: node_js
 node_js:
   - 0.10.33
 
-before_script: mkdir -p shippable/testresults
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p test
 
 script:
   - ./node_modules/.bin/mocha -R xunit > shippable/testresults/nosetests.xml
