@@ -7,8 +7,8 @@ before_script:
   - mkdir -p test
 
 script:
-  - ./node_modules/.bin/mocha -R xunit > shippable/testresults/nosetests.xml
+  - ./node_modules/.bin/mocha --recursive -R xunit > shippable/testresults/nosetests.xml
 
 after_script:
-  - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec
+  - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive -R spec
   - ./node_modules/.bin/istanbul report cobertura --dir shippable/codecoverage
