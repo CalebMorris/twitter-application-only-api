@@ -12,7 +12,7 @@
     "url": "https://github.com/CalebMorris/twitter-application-only-api/issues"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --recursive",
     "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'"
   },
   "author": {
