@@ -22,10 +22,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.3.11",
-    "joi": "^4.6.1",
+    "bluebird": "^2.4.0",
+    "joi": "^4.9.0",
     "lodash": "^2.4.1",
-    "request": "^2.39.0"
+    "request": "^2.51.0"
   },
   "readmeFilename": "README.md",
   "devDependencies": {
