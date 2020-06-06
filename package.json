@@ -3,6 +3,9 @@
   "version": "0.1.1",
   "description": "Node interropt for application-only Twitter API",
   "main": "index.js",
+  "engines" : {
+    "node" : ">=12.0.0"
+  },
   "homepage": "https://github.com/CalebMorris/twitter-application-only-api",
   "repository": {
     "type": "git",
