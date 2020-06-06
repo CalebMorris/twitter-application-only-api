@@ -3,7 +3,7 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var joi = require('joi');
+var Joi = require('@hapi/joi');
 
 var testFunc = require('../../../lib/util').validateOptions;
 
@@ -32,7 +32,7 @@ describe('validateOptions', function() {
   describe('response', function() {
 
     it('should reject with fails validation', function(done) {
-      testFunc('', joi.object().keys({ t : joi.string().required() }), {})
+      testFunc('', Joi.object().keys({ t : Joi.string().required() }), {})
       .then(done.bind(null, new chai.AssertionError('Promise should have rejected')))
       .catch(function(err) {
         expect(err).to.be.an.instanceof(Error);
@@ -43,7 +43,7 @@ describe('validateOptions', function() {
     });
 
     it('should resolve if passes validation', function(done) {
-      testFunc('', joi.object(), {})
+      testFunc('', Joi.object(), {})
       .then(function(result) {
         expect(result).to.equal(undefined);
         done();

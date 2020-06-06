@@ -3,8 +3,8 @@
   "version": "0.1.1",
   "description": "Node interropt for application-only Twitter API",
   "main": "index.js",
-  "engines" : {
-    "node" : ">=12.0.0"
+  "engines": {
+    "node": ">=12.0.0"
   },
   "homepage": "https://github.com/CalebMorris/twitter-application-only-api",
   "repository": {
@@ -26,8 +26,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "bluebird": "^2.4.0",
-    "joi": "^4.9.0",
     "lodash": "^2.4.1",
     "request": "^2.51.0"
   },
