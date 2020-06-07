@@ -15,7 +15,7 @@
     "url": "https://github.com/CalebMorris/twitter-application-only-api/issues"
   },
   "scripts": {
-    "coverage": " ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive ",
+    "coverage": "nyc --all mocha --recursive",
     "test": "mocha --recursive",
     "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'"
   },
@@ -34,9 +34,9 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "chai": "^1.10.0",
-    "istanbul": "^0.3.2",
     "mocha": "^2.0.1",
     "nodemon": "^1.2.1",
+    "nyc": "^15.1.0",
     "proxyquire": "~1.1.0",
     "sinon": "~1.12.1"
   }
