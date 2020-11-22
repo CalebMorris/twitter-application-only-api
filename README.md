@@ -1,6 +1,6 @@
 # Twitter Application Only API
 
-[![Build Status](https://api.shippable.com/projects/5473aa56d46935d5fbbe78c1/badge?branchName=master)](https://app.shippable.com/projects/5473aa56d46935d5fbbe78c1/builds/latest)
+[![Build Status](https://travis-ci.org/CalebMorris/twitter-application-only-api.svg?branch=master)](https://travis-ci.org/CalebMorris/twitter-application-only-api)
 
 A subset of the Twitter API can be used without a Twitter account.  
 This is done by using a different [authentication](https://dev.twitter.com/docs/auth/application-only-auth) method over oAuth.  
