@@ -6,6 +6,10 @@ A subset of the Twitter API can be used without a Twitter account.
 This is done by using a different [authentication](https://dev.twitter.com/docs/auth/application-only-auth) method over oAuth.  
 This module handles authentication and abstracts the API endpoints to Javascript methods.  
 
+## API Version
+
+This package is only written to work against the [Twitter v1.1 API](https://developer.twitter.com/en/docs/api-reference-index#twitter-api-v1) and doesn't currently support the new V2 API.
+
 ## Example
 ```javascript
 var Twitter  = require('twitter-app-api');
