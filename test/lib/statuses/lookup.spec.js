@@ -18,7 +18,7 @@ describe('statuses/lookup', function() {
     })
 
     it('should pass when all required fields', () => {
-      const validationResponse = lookup.optionsSchema.validate({id:['id1']});
+      const validationResponse = lookup.optionsSchema.validate({id:'id1'});
       expect(validationResponse, JSON.stringify(validationResponse)).to.not.be.null;
       expect(validationResponse.error, JSON.stringify(validationResponse.error)).to.be.undefined;
     })
