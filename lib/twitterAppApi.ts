@@ -48,7 +48,7 @@ export class Twitter {
     this.token = token;
   }
 
-  authenticate = () => require('./actions/authenticate').authenticate(this.setToken);
+  authenticate = () => require('./actions/authenticate').authenticate(() => [this.apiKey, this.apiSecret], (x: string) => this.setToken(x));
 
   favorites(options) {
     return require('./actions/favorites').favorites(this.token, options);

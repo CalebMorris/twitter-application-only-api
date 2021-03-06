@@ -8,8 +8,9 @@ function TwitterApiError(message, body) {
 }
 TwitterApiError.prototype = Error.prototype;
 
-var authenticate = function(setToken: (string) => void) {
-  var credentials = new Buffer(this.apiKey + ':' + this.apiSecret).toString('base64');
+export const authenticate = function(getKeys: () => string[], setToken: (string) => void) {
+  const [key, sec] = getKeys();
+  const credentials = Buffer.from(key + ':' + sec).toString('base64')
 
   var options = {
     url     : 'https://api.twitter.com/oauth2/token',
@@ -50,8 +51,4 @@ var authenticate = function(setToken: (string) => void) {
     });
   });
 
-};
-
-module.exports = {
-  authenticate : authenticate,
 };

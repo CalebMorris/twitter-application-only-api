@@ -14,7 +14,7 @@ const users_1 = __importDefault(require("./actions/users"));
 const normalizeOptions = require('./config/api-options').normalize;
 class Twitter {
     constructor(apiKey, apiSecret, options) {
-        this.authenticate = () => require('./actions/authenticate').authenticate(this.setToken);
+        this.authenticate = () => require('./actions/authenticate').authenticate(() => [this.apiKey, this.apiSecret], (x) => this.setToken(x));
         if (typeof apiKey !== 'string') {
             throw new TypeError('apiKey isn\'t a string');
         }

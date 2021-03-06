@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authenticate = void 0;
 var request = require('request');
 function TwitterApiError(message, body) {
     this.name = 'TwitterApiError';
@@ -7,8 +9,9 @@ function TwitterApiError(message, body) {
     this.statck = new Error().stack;
 }
 TwitterApiError.prototype = Error.prototype;
-var authenticate = function (setToken) {
-    var credentials = new Buffer(this.apiKey + ':' + this.apiSecret).toString('base64');
+const authenticate = function (getKeys, setToken) {
+    const [key, sec] = getKeys();
+    const credentials = Buffer.from(key + ':' + sec).toString('base64');
     var options = {
         url: 'https://api.twitter.com/oauth2/token',
         method: 'POST',
@@ -42,6 +45,4 @@ var authenticate = function (setToken) {
         });
     });
 };
-module.exports = {
-    authenticate: authenticate,
-};
+exports.authenticate = authenticate;
