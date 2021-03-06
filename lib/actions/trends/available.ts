@@ -1,9 +1,5 @@
-var util = require('../../util');
+import util from '../../util';
 
-var available = function() {
+export const available = function() {
   return util.generateNoSchemaHandler.call(this, 'trends/available');
-};
-
-module.exports = {
-  available : available,
 };

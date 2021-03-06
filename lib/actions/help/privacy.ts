@@ -1,7 +1,3 @@
-var util    = require('../../util');
+import util from '../../util';
 
-var privacy = util.generateNoSchemaHandler('help/privacy');
-
-module.exports = {
-  privacy : privacy,
-};
+export const privacy = util.generateNoSchemaHandler('help/privacy');

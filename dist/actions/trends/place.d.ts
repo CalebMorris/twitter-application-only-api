@@ -1,5 +1,4 @@
-declare var request: any;
-declare var util: any;
-declare var Joi: any;
-declare var optionsSchema: any;
-declare var place: () => any;
+/// <reference types="hapi__joi" />
+import Joi from '@hapi/joi';
+export declare const optionsSchema: Joi.ObjectSchema<any>;
+export declare const place: () => (token: string, options: any) => Promise<unknown>;

@@ -1,14 +1,15 @@
 import _    from 'lodash';
+import Joi  from '@hapi/joi';
 import util from '../../util';
 
-var commonSchema = {
+const commonSchema = {
   user_id           : Joi.string(),
   screen_name       : Joi.string(),
   include_entities  : Joi.boolean(),
   skip_status       : Joi.boolean(),
 };
 
-var optionsSchema = [
+export const optionsSchema = [
   Joi.object().keys(_.extend({
     slug              : Joi.string().required(),
     owner_screen_name : Joi.string(),
@@ -19,11 +20,6 @@ var optionsSchema = [
   }, commonSchema)).or('user_id', 'screen_name'),
 ];
 
-var show = function() {
+export const show = function() {
   return util.generateApiHandler.call(this, 'lists/subscribers/show', optionsSchema);
-};
-
-module.exports = {
-  show          : show,
-  optionsSchema : optionsSchema,
 };

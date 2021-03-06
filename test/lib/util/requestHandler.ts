@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* global describe, it, beforeEach, afterEach */
 
 import { expect } from 'chai';
 import sinon from 'sinon';
 
 import request from 'request';
-import util from '../../../lib/util';
-var testFunc = util.requestHandler;
+import { requestHandler as testFunc } from '../../../lib/util';
 
-var noop = function() {};
-var pass = function() { expect(true).to.be.true; };
-var fail = function(l) { expect(false).to.be.true; };
+const noop = function() {};
+const pass = function() { expect(true).to.be.true; };
+const fail = function(l) { expect(false).to.be.true; };
 
 describe('requestHandler', function() {
 
@@ -39,7 +39,7 @@ describe('requestHandler', function() {
 
   describe('response', function() {
 
-    var getStub;
+    let getStub;
 
     beforeEach(function() {
       getStub = sinon.stub(request, 'get');
@@ -54,8 +54,8 @@ describe('requestHandler', function() {
     });
 
     it('request succeeds', function() {
-      var r = { statusCode : 200 };
-      var b = '{ "foo":"this is body" }';
+      const r = { statusCode : 200 };
+      const b = '{ "foo":"this is body" }';
       getStub.callsArgWith(1, null, r, b );
 
       testFunc(pass, fail, '', '', {});

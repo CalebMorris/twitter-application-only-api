@@ -1,7 +1,7 @@
 import util from '../../util';
 import Joi  from '@hapi/joi';
 
-var optionsSchema = [
+export const optionsSchema = [
   Joi.object().keys({
     slug              : Joi.string().required(),
     user_id           : Joi.string(),
@@ -24,11 +24,6 @@ var optionsSchema = [
   }).or('user_id', 'screen_name'),
 ];
 
-var show = function() {
+export const show = function() {
   return util.generateApiHandler.call(this, 'lists/members/show', optionsSchema);
-};
-
-module.exports = {
-  show          : show,
-  optionsSchema : optionsSchema,
 };

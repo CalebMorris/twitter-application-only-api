@@ -1,4 +1,8 @@
 import TokenManagedApi from '../token-managed-api';
+import { configuration } from './configuration';
+import { languages } from './languages';
+import { privacy } from './privacy';
+import { tos } from './tos';
 
 class Help extends TokenManagedApi {
   constructor(twit) {
@@ -6,20 +10,20 @@ class Help extends TokenManagedApi {
   }
 
   configuration(options) {
-    return require('./configuration').configuration(this.getToken(), options);
-  };
+    return configuration(this.getToken(), options);
+  }
 
   languages(options) {
-    return require('./languages').languages(this.getToken(), options);
-  };
+    return languages(this.getToken(), options);
+  }
 
   privacy(options) {
-    return require('./privacy').privacy(this.getToken(), options);
-  };
+    return privacy(this.getToken(), options);
+  }
 
   tos(options) {
-    return require('./tos').tos(this.getToken(), options);
-  };
+    return tos(this.getToken(), options);
+  }
 
 }
 

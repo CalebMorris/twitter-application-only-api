@@ -1,8 +1,11 @@
 "use strict";
-var util = require('../../util');
-var available = function () {
-    return util.generateNoSchemaHandler.call(this, 'trends/available');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-module.exports = {
-    available: available,
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.available = void 0;
+const util_1 = __importDefault(require("../../util"));
+const available = function () {
+    return util_1.default.generateNoSchemaHandler.call(this, 'trends/available');
 };
+exports.available = available;

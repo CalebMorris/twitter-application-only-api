@@ -1,21 +1,16 @@
-var util = require('../../util');
-var Joi  = require('@hapi/joi');
+import util from '../../util';
+import Joi  from '@hapi/joi';
 
-var optionsSchema = Joi.object().keys({
+export const optionsSchema = Joi.object().keys({
   slug : Joi.string().required(),
   lang : Joi.string(),
 });
 
-var slug = function() {
+export const slug = function() {
   return util.generateUrlInsertedHandler.call(
     this,
     [ 'slug' ],
     [ 'users/suggestions' ],
     optionsSchema
   );
-};
-
-module.exports = {
-  slug          : slug,
-  optionsSchema : optionsSchema,
 };

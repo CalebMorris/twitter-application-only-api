@@ -3,9 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.members = exports.optionsSchema = void 0;
 const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
-var optionsSchema = [joi_1.default.object().keys({
+exports.optionsSchema = [joi_1.default.object().keys({
         slug: joi_1.default.string().required(),
         owner_screen_name: joi_1.default.string(),
         owner_id: joi_1.default.string(),
@@ -20,10 +21,7 @@ var optionsSchema = [joi_1.default.object().keys({
         include_entities: joi_1.default.boolean(),
         skip_status: joi_1.default.boolean(),
     })];
-var members = function () {
-    return util_1.default.generateApiHandler.call(this, 'lists/members', optionsSchema);
+const members = function () {
+    return util_1.default.generateApiHandler.call(this, 'lists/members', exports.optionsSchema);
 };
-module.exports = {
-    members: members,
-    optionsSchema: optionsSchema,
-};
+exports.members = members;

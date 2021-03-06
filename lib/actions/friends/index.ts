@@ -1,4 +1,6 @@
 import TokenManagedApi from '../token-managed-api';
+import { ids } from './ids';
+import { list } from './list';
 
 class Friends extends TokenManagedApi {
   constructor(twit) {
@@ -6,12 +8,12 @@ class Friends extends TokenManagedApi {
   }
 
   ids(options) {
-    return require('./ids').ids(this.getToken(), options);
-  };
+    return ids(this.getToken(), options);
+  }
   
   list(options) {
-    return require('./list').list(this.getToken(), options);
-  };
+    return list(this.getToken(), options);
+  }
 }
 
 export default Friends;

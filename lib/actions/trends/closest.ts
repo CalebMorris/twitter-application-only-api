@@ -1,17 +1,11 @@
-var request = require('request');
-var util    = require('../../util');
-var Joi     = require('@hapi/joi');
+import util    from '../../util';
+import Joi     from '@hapi/joi';
 
-var optionsSchema = Joi.object().keys({
+export const optionsSchema = Joi.object().keys({
   lat  : Joi.string().required(),
   long : Joi.string().required(),
 });
 
-var closest = function() {
+export const closest = function() {
   return util.generateApiHandler.call(this, 'trends/closest', optionsSchema);
-};
-
-module.exports = {
-  closest       : closest,
-  optionsSchema : optionsSchema,
 };

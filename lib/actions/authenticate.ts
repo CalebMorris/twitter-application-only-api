@@ -1,4 +1,4 @@
-var request = require('request');
+import request from 'request';
 
 function TwitterApiError(message, body) {
   this.name = 'TwitterApiError';
@@ -8,11 +8,10 @@ function TwitterApiError(message, body) {
 }
 TwitterApiError.prototype = Error.prototype;
 
-export const authenticate = function(getKeys: () => string[], setToken: (string) => void) {
+export const authenticate = function(getKeys: () => string[], setToken: (string) => void): Promise<string> {
   const [key, sec] = getKeys();
   const credentials = Buffer.from(key + ':' + sec).toString('base64')
-
-  var options = {
+  const options = {
     url     : 'https://api.twitter.com/oauth2/token',
     method  : 'POST',
     headers : {
@@ -34,7 +33,7 @@ export const authenticate = function(getKeys: () => string[], setToken: (string)
           throw new Error('Missing body from auth request');
         }
 
-        var info = JSON.parse(body);
+        const info = JSON.parse(body);
         if (info.token_type !== 'bearer') {
           throw new Error('Response token was of the wrong type: ' + info.token_type);
         }

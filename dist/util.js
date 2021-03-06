@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.generateNoSchemaHandler = exports.validateOptions = exports.requestHandler = void 0;
 const lodash_1 = __importDefault(require("lodash"));
 const assert_1 = __importDefault(require("assert"));
 const request_1 = __importDefault(require("request"));
@@ -27,7 +28,7 @@ function requestHandler(resolve, reject, path, token, options) {
     if (this && this.options && this.options.tweet_mode) {
         options[tweet_mode_1.tweetModeKey] = this.options.tweet_mode;
     }
-    var requestOptions = {
+    const requestOptions = {
         url: 'https://api.twitter.com/1.1/' + path + '.json?' +
             querystring_1.default.stringify(options),
         method: 'GET',
@@ -38,12 +39,13 @@ function requestHandler(resolve, reject, path, token, options) {
     };
     return request_1.default.get(requestOptions, requestCallback.bind(this, resolve, reject));
 }
+exports.requestHandler = requestHandler;
 function validateOptions(token, schema, options) {
     assert_1.default(lodash_1.default.isString(token), 'token must be a string');
     assert_1.default(lodash_1.default.isObject(schema), 'schema must be an object');
     assert_1.default(lodash_1.default.isObject(options), 'options must be an object');
     return new Promise((resolve, reject) => {
-        var validationResult = schema.validate(options, {
+        const validationResult = schema.validate(options, {
             allowUnknown: true
         });
         if (validationResult.warning) {
@@ -56,6 +58,7 @@ function validateOptions(token, schema, options) {
         return resolve();
     });
 }
+exports.validateOptions = validateOptions;
 function generatedNoSchemaHandler(path, token, options) {
     return new Promise((resolve, reject) => {
         requestHandler(resolve, reject, path, token, options);
@@ -82,12 +85,12 @@ function generateUrlInsertedHandler(insertedValueNames, pathInterleves, schema) 
         return new Promise((resolve, reject) => {
             return validateOptions(token, schema, options)
                 .then(() => {
-                var insertedValues = lodash_1.default.map(insertedValueNames, function mapValueNameToValue(valueName) {
-                    var tmp = options[valueName];
+                const insertedValues = lodash_1.default.map(insertedValueNames, function mapValueNameToValue(valueName) {
+                    const tmp = options[valueName];
                     delete options[valueName];
                     return tmp;
                 });
-                var path = '';
+                let path = '';
                 lodash_1.default.forEach(insertedValues, function (value, index) {
                     path += pathInterleves[index] + '/' + value;
                 });
@@ -102,6 +105,7 @@ function generateUrlInsertedHandler(insertedValueNames, pathInterleves, schema) 
 function generateNoSchemaHandler(path) {
     return generatedNoSchemaHandler.bind(this, path);
 }
+exports.generateNoSchemaHandler = generateNoSchemaHandler;
 exports.default = {
     generateApiHandler: generateApiHandler,
     generateNoSchemaHandler: generateNoSchemaHandler,

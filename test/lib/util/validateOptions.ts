@@ -1,10 +1,8 @@
 /* global describe, it */
 
-import chai from 'chai';
 import Joi from '@hapi/joi';
-const expect = chai.expect;
-
-var testFunc = require('../../../lib/util').validateOptions;
+import { expect, AssertionError } from 'chai';
+import { validateOptions as testFunc } from '../../../lib/util';
 
 describe('validateOptions', function() {
 
@@ -32,7 +30,7 @@ describe('validateOptions', function() {
 
     it('should reject with fails validation', function(done) {
       testFunc('', Joi.object().keys({ t : Joi.string().required() }), {})
-      .then(done.bind(null, new chai.AssertionError('Promise should have rejected')))
+      .then(done.bind(null, new AssertionError('Promise should have rejected')))
       .catch(function(err) {
         expect(err).to.be.an.instanceof(Error);
         expect(err.name).to.equal('ValidationError');

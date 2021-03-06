@@ -1,15 +1,16 @@
 "use strict";
-var request = require('request');
-var util = require('../../util');
-var Joi = require('@hapi/joi');
-var optionsSchema = Joi.object().keys({
-    lat: Joi.string().required(),
-    long: Joi.string().required(),
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.closest = exports.optionsSchema = void 0;
+const util_1 = __importDefault(require("../../util"));
+const joi_1 = __importDefault(require("@hapi/joi"));
+exports.optionsSchema = joi_1.default.object().keys({
+    lat: joi_1.default.string().required(),
+    long: joi_1.default.string().required(),
 });
-var closest = function () {
-    return util.generateApiHandler.call(this, 'trends/closest', optionsSchema);
+const closest = function () {
+    return util_1.default.generateApiHandler.call(this, 'trends/closest', exports.optionsSchema);
 };
-module.exports = {
-    closest: closest,
-    optionsSchema: optionsSchema,
-};
+exports.closest = closest;

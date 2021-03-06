@@ -10,7 +10,7 @@ const optionsSchema = Joi.object({
   [tweetMode.key]: tweetMode.schema,
 });
 
-function normalize(currentOptions) {
+export function normalize(currentOptions) {
   const validationResult = optionsSchema.validate(currentOptions);
   if (validationResult.warning) {
     console.warn(`API Options validation warning [${validationResult.warning}]`);
@@ -24,7 +24,3 @@ function normalize(currentOptions) {
   console.log('API Options used', actualOptions);
   return actualOptions;
 }
-
-module.exports = {
-  normalize: normalize,
-};

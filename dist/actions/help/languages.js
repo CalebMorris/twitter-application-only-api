@@ -1,6 +1,5 @@
 "use strict";
-var util = require('../../util');
-var languages = util.generateNoSchemaHandler('help/languages');
-module.exports = {
-    languages: languages,
-};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.languages = void 0;
+const util_1 = require("../../util");
+exports.languages = util_1.generateNoSchemaHandler('help/languages');

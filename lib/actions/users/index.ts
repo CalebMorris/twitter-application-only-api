@@ -1,4 +1,6 @@
 import TokenManagedApi from '../token-managed-api';
+import { show } from './show';
+import { lookup } from './lookup';
 
 class Users extends TokenManagedApi {
   constructor(twit) {
@@ -6,11 +8,12 @@ class Users extends TokenManagedApi {
   }
 
   show(options) {
-    return require('./show').show.call(this.twit)(this.getToken(), options);
-  };
+    return show.call(this.twit)(this.getToken(), options);
+  }
+
   lookup(options) {
-    return require('./lookup').lookup.call(this.twit)(this.getToken(), options);
-  };
+    return lookup.call(this.twit)(this.getToken(), options);
+  }
 
 }
 

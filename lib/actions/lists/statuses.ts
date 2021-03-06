@@ -2,7 +2,7 @@ import _    from 'lodash';
 import util from '../../util';
 import Joi  from '@hapi/joi';
 
-var commonSchema = {
+const commonSchema = {
   since_id          : Joi.string(),
   max_id            : Joi.string(),
   count             : Joi.number().integer(),
@@ -10,7 +10,7 @@ var commonSchema = {
   include_rts       : Joi.boolean(),
 };
 
-var optionsSchema = [
+export const optionsSchema = [
   Joi.object().keys(_.extend({
     slug              : Joi.string().required(),
     owner_screen_name : Joi.string(),
@@ -21,11 +21,6 @@ var optionsSchema = [
   }, commonSchema)),
 ];
 
-var statuses = function() {
+export const statuses = function() {
   return util.generateApiHandler.call(this, 'lists/statuses', optionsSchema);
-};
-
-module.exports = {
-  statuses      : statuses,
-  optionsSchema : optionsSchema,
 };

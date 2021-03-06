@@ -1,2 +1,1 @@
-declare var util: any;
-declare var available: () => any;
+export declare const available: () => (token: any, options: any) => Promise<unknown>;

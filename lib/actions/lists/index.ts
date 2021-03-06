@@ -1,4 +1,10 @@
 import TokenManagedApi from '../token-managed-api';
+import { list } from './list';
+import { memberships } from './memberships';
+import { ownerships } from './ownerships';
+import { show } from './show';
+import { statuses } from './statuses';
+import { subscriptions } from './subscriptions';
 
 class Lists extends TokenManagedApi {
   constructor(twit) {
@@ -6,28 +12,28 @@ class Lists extends TokenManagedApi {
   }
 
   list(options) {
-    return require('./list').list.call(this.twit)(this.getToken(), options);
-  };
+    return list.call(this.twit)(this.getToken(), options);
+  }
 
   memberships(options) {
-    return require('./memberships').memberships.call(this.twit)(this.getToken(), options);
-  };
+    return memberships.call(this.twit)(this.getToken(), options);
+  }
 
   ownerships(options) {
-    return require('./ownerships').ownerships.call(this.twit)(this.getToken(), options);
-  };
+    return ownerships.call(this.twit)(this.getToken(), options);
+  }
 
   show(options) {
-    return require('./show').show.call(this.twit)(this.getToken(), options);
-  };
+    return show.call(this.twit)(this.getToken(), options);
+  }
 
   statuses(options) {
-    return require('./statuses').statuses.call(this.twit)(this.getToken(), options);
-  };
+    return statuses.call(this.twit)(this.getToken(), options);
+  }
 
   subscriptions(options) {
-    return require('./subscriptions').subscriptions.call(this.twit)(this.getToken(), options);
-  };
+    return subscriptions.call(this.twit)(this.getToken(), options);
+  }
 
 }
 

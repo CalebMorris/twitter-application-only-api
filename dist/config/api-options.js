@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.normalize = void 0;
 const joi_1 = __importDefault(require("@hapi/joi"));
 const tweet_mode_1 = __importDefault(require("./tweet-mode"));
 const defaults = {
@@ -24,6 +25,4 @@ function normalize(currentOptions) {
     console.log('API Options used', actualOptions);
     return actualOptions;
 }
-module.exports = {
-    normalize: normalize,
-};
+exports.normalize = normalize;

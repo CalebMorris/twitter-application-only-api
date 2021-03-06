@@ -1,4 +1,6 @@
 import TokenManagedApi from '../token-managed-api';
+import { ids } from './ids';
+import { list } from './list';
 
 class Followers extends TokenManagedApi {
   constructor(twit) {
@@ -6,11 +8,11 @@ class Followers extends TokenManagedApi {
   }
 
   ids(options) {
-    return require('./ids').ids(this.getToken(), options);
+    return ids(this.getToken(), options);
   }
 
   list(options) {
-    return require('./list').list(this.getToken(), options);
+    return list(this.getToken(), options);
   }
 }
 

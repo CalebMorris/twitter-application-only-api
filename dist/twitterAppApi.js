@@ -11,17 +11,21 @@ const lists_1 = __importDefault(require("./actions/lists"));
 const statuses_1 = __importDefault(require("./actions/statuses"));
 const trends_1 = __importDefault(require("./actions/trends"));
 const users_1 = __importDefault(require("./actions/users"));
-const normalizeOptions = require('./config/api-options').normalize;
+const api_options_1 = require("./config/api-options");
+const authenticate_1 = require("./actions/authenticate");
+const favorites_1 = require("./actions/favorites");
+const friendships_1 = require("./actions/friendships");
+const search_1 = require("./actions/search");
 class Twitter {
     constructor(apiKey, apiSecret, options) {
-        this.authenticate = () => require('./actions/authenticate').authenticate(() => [this.apiKey, this.apiSecret], (x) => this.setToken(x));
+        this.authenticate = () => authenticate_1.authenticate(() => [this.apiKey, this.apiSecret], (x) => this.setToken(x));
         if (typeof apiKey !== 'string') {
             throw new TypeError('apiKey isn\'t a string');
         }
         if (typeof apiSecret !== 'string') {
             throw new TypeError('apiSecret isn\'t a string');
         }
-        this.options = normalizeOptions(options);
+        this.options = api_options_1.normalize(options);
         console.log(`Twitter(options=${JSON.stringify(options)}); this.options=${JSON.stringify(this.options)}`);
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
@@ -36,17 +40,20 @@ class Twitter {
     setToken(token) {
         this.token = token;
     }
+    getToken() {
+        if (!this.token) {
+            throw new Error('Unable to retrieve bearer token from local reference');
+        }
+        return this.token;
+    }
     favorites(options) {
-        return require('./actions/favorites').favorites(this.token, options);
+        return favorites_1.favorites(this.getToken(), options);
     }
-    ;
     friendships(options) {
-        return require('./actions/friendships').friendships(this.token, options);
+        return friendships_1.friendships(this.getToken(), options);
     }
-    ;
     search(options) {
-        return require('./actions/search').search(this.token, options);
+        return search_1.search(this.getToken(), options);
     }
-    ;
 }
 exports.Twitter = Twitter;

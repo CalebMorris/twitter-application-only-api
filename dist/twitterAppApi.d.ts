@@ -19,8 +19,9 @@ export declare class Twitter {
     users: Users;
     constructor(apiKey: string, apiSecret: string, options: any);
     private setToken;
-    authenticate: () => any;
-    favorites(options: any): any;
-    friendships(options: any): any;
-    search(options: any): any;
+    private getToken;
+    authenticate: () => Promise<string>;
+    favorites(options: any): Promise<unknown>;
+    friendships(options: any): Promise<unknown>;
+    search(options: any): Promise<unknown>;
 }

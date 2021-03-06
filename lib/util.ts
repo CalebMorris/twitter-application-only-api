@@ -18,7 +18,7 @@ function requestCallback(resolve, reject, err, res, body) {
   return resolve(body ? JSON.parse(body) : null);
 }
 
-function requestHandler(resolve, reject, path, token, options) {
+export function requestHandler(resolve, reject, path, token, options) {
   assert(_.isFunction(resolve), 'resolve must be a function');
   assert(_.isFunction(reject), 'reject must be a function');
   assert(_.isString(path), 'path must be a string');
@@ -31,7 +31,7 @@ function requestHandler(resolve, reject, path, token, options) {
     options[tweetModeKey] = this.options.tweet_mode;
   }
 
-  var requestOptions = {
+  const requestOptions = {
     url     : 'https://api.twitter.com/1.1/' + path + '.json?' +
               querystring.stringify(options),
     method  : 'GET',
@@ -44,13 +44,13 @@ function requestHandler(resolve, reject, path, token, options) {
   return request.get(requestOptions, requestCallback.bind(this, resolve, reject));
 }
 
-function validateOptions(token, schema, options) {
+export function validateOptions(token, schema, options) {
   assert(_.isString(token), 'token must be a string');
   assert(_.isObject(schema), 'schema must be an object');
   assert(_.isObject(options), 'options must be an object');
 
   return new Promise<void>((resolve, reject) => {
-    var validationResult = schema.validate(options, {
+    const validationResult = schema.validate(options, {
       allowUnknown: true
     });
     if (validationResult.warning) {
@@ -98,16 +98,16 @@ function generateUrlInsertedHandler<TResults>(insertedValueNames, pathInterleves
     return new Promise((resolve, reject) => {
       return validateOptions(token, schema, options)
       .then(() => {
-        var insertedValues = _.map(
+        const insertedValues = _.map(
           insertedValueNames,
           function mapValueNameToValue(valueName) {
-            var tmp = options[valueName];
+            const tmp = options[valueName];
             delete options[valueName];
             return tmp;
           }
         );
 
-        var path = '';
+        let path = '';
         _.forEach(insertedValues, function(value, index) {
           path += pathInterleves[index] + '/' + value;
         });
@@ -122,7 +122,7 @@ function generateUrlInsertedHandler<TResults>(insertedValueNames, pathInterleves
   };
 }
 
-function generateNoSchemaHandler(path) {
+export function generateNoSchemaHandler(path) {
   return generatedNoSchemaHandler.bind(this, path);
 }
 

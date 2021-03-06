@@ -1,6 +1,5 @@
 "use strict";
-var util = require('../../util');
-var tos = util.generateNoSchemaHandler('help/tos');
-module.exports = {
-    tos: tos,
-};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.tos = void 0;
+const util_1 = require("../../util");
+exports.tos = util_1.generateNoSchemaHandler('help/tos');

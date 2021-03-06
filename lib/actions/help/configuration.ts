@@ -1,6 +1,3 @@
-var util = require('../../util');
-var configuration = util.generateNoSchemaHandler('help/configuration');
+import { generateNoSchemaHandler } from '../../util';
 
-module.exports = {
-  configuration : configuration,
-};
+export const configuration = generateNoSchemaHandler('help/configuration');

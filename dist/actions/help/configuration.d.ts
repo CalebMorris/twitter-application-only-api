@@ -1,2 +1,1 @@
-declare var util: any;
-declare var configuration: any;
+export declare const configuration: (token: any, options: any) => Promise<unknown>;

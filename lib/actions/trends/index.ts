@@ -1,19 +1,24 @@
 import TokenManagedApi from '../token-managed-api';
+import { available } from './available';
+import { closest } from './closest';
+import { place } from './place';
 
 class Trends extends TokenManagedApi {
   constructor(twit) {
     super(twit);
   }
 
-  available() {
-    return require('./available').available.call(this.twit)(this.getToken());
-  };
+  available(options) {
+    return available.call(this.twit)(this.getToken(), options);
+  }
+
   closest(options) {
-    return require('./closest').closest.call(this.twit)(this.getToken(), options);
-  };
+    return closest.call(this.twit)(this.getToken(), options);
+  }
+
   place(options) {
-    return require('./place').place.call(this.twit)(this.getToken(), options);
-  };
+    return place.call(this.twit)(this.getToken(), options);
+  }
 
 }
 

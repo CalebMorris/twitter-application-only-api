@@ -1,7 +1,7 @@
 import util from '../util';
 import Joi  from '@hapi/joi';
 
-var optionsSchema = Joi.object().keys({
+export const optionsSchema = Joi.object().keys({
   q           : Joi.string().min(1).required(),
   result_type : Joi.string().min(1),
   geocode     : Joi.string().min(1),
@@ -12,9 +12,4 @@ var optionsSchema = Joi.object().keys({
   max_id      : Joi.string().min(1),
 });
 
-var search = util.generateApiHandler('search/tweets', optionsSchema);
-
-module.exports = {
-  search        : search,
-  optionsSchema : optionsSchema,
-};
+export const search = util.generateApiHandler('search/tweets', optionsSchema);

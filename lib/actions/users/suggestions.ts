@@ -1,15 +1,10 @@
-var util = require('../../util');
-var Joi  = require('@hapi/joi');
+import util from '../../util';
+import Joi  from '@hapi/joi';
 
-var optionsSchema = Joi.object().keys({
+export const optionsSchema = Joi.object().keys({
   lang : Joi.string(),
 });
 
-var suggestions = function() {
+export const suggestions = function() {
   return util.generateApiHandler.call(this, 'users/suggestions', optionsSchema);
-};
-
-module.exports = {
-  suggestions   : suggestions,
-  optionsSchema : optionsSchema,
 };

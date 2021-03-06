@@ -5,8 +5,11 @@ import Lists    from './actions/lists';
 import Statuses from './actions/statuses';
 import Trends   from './actions/trends';
 import Users    from './actions/users';
-
-const normalizeOptions = require('./config/api-options').normalize;
+import { normalize as normalizeOptions } from './config/api-options'
+import { authenticate } from './actions/authenticate';
+import { favorites } from './actions/favorites';
+import { friendships } from './actions/friendships';
+import { search } from './actions/search';
 
 export class Twitter {
   apiKey: string; // TODO: remove
@@ -48,18 +51,25 @@ export class Twitter {
     this.token = token;
   }
 
-  authenticate = () => require('./actions/authenticate').authenticate(() => [this.apiKey, this.apiSecret], (x: string) => this.setToken(x));
+  private getToken(): string {
+    if (!this.token) {
+      throw new Error('Unable to retrieve bearer token from local reference');
+    }
+    return this.token;
+  }
+
+  authenticate = () => authenticate(() => [this.apiKey, this.apiSecret], (x: string) => this.setToken(x));
 
   favorites(options) {
-    return require('./actions/favorites').favorites(this.token, options);
-  };
+    return favorites(this.getToken(), options);
+  }
 
   friendships(options) {
-    return require('./actions/friendships').friendships(this.token, options);
-  };
+    return friendships(this.getToken(), options);
+  }
 
   search(options) {
-    return require('./actions/search').search(this.token, options);
-  };
+    return search(this.getToken(), options);
+  }
 
 }

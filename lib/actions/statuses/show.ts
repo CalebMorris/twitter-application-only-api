@@ -6,7 +6,7 @@ export interface ShowOptions {
   id: string,
 }
 
-export interface ShowResults extends Tweet{}
+export type ShowResults = Tweet
 
 // TODO: update with actual params
 export const optionsSchema = Joi.object().keys({

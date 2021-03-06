@@ -1,2 +1,1 @@
-declare var util: any;
-declare var tos: any;
+export declare const tos: (token: any, options: any) => Promise<unknown>;

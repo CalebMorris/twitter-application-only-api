@@ -1,6 +1,3 @@
-var util = require('../../util');
-var languages = util.generateNoSchemaHandler('help/languages');
+import { generateNoSchemaHandler } from '../../util';
 
-module.exports = {
-  languages : languages,
-};
+export const languages = generateNoSchemaHandler('help/languages');

@@ -1,13 +1,15 @@
 "use strict";
-var util = require('../../util');
-var Joi = require('@hapi/joi');
-var optionsSchema = Joi.object().keys({
-    lang: Joi.string(),
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.suggestions = exports.optionsSchema = void 0;
+const util_1 = __importDefault(require("../../util"));
+const joi_1 = __importDefault(require("@hapi/joi"));
+exports.optionsSchema = joi_1.default.object().keys({
+    lang: joi_1.default.string(),
 });
-var suggestions = function () {
-    return util.generateApiHandler.call(this, 'users/suggestions', optionsSchema);
+const suggestions = function () {
+    return util_1.default.generateApiHandler.call(this, 'users/suggestions', exports.optionsSchema);
 };
-module.exports = {
-    suggestions: suggestions,
-    optionsSchema: optionsSchema,
-};
+exports.suggestions = suggestions;

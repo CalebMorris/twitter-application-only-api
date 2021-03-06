@@ -4,21 +4,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const token_managed_api_1 = __importDefault(require("../token-managed-api"));
+const available_1 = require("./available");
+const closest_1 = require("./closest");
+const place_1 = require("./place");
 class Trends extends token_managed_api_1.default {
     constructor(twit) {
         super(twit);
     }
-    available() {
-        return require('./available').available.call(this.twit)(this.getToken());
+    available(options) {
+        return available_1.available.call(this.twit)(this.getToken(), options);
     }
-    ;
     closest(options) {
-        return require('./closest').closest.call(this.twit)(this.getToken(), options);
+        return closest_1.closest.call(this.twit)(this.getToken(), options);
     }
-    ;
     place(options) {
-        return require('./place').place.call(this.twit)(this.getToken(), options);
+        return place_1.place.call(this.twit)(this.getToken(), options);
     }
-    ;
 }
 exports.default = Trends;

@@ -1,2 +1,1 @@
-declare var util: any;
-declare var languages: any;
+export declare const languages: (token: any, options: any) => Promise<unknown>;

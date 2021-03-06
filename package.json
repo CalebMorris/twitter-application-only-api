@@ -19,7 +19,9 @@
     "test": "mocha --trace-warnings --require ts-node/register ./test/**/*.spec.ts",
     "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'",
     "build": "tsc",
-    "clean": "rm -Rf ./dist"
+    "clean": "rm -Rf ./dist",
+    "lint": "eslint . --ext .ts",
+    "lint-quiet": "eslint . --ext .ts --quiet"
   },
   "author": {
     "name": "Caleb Morris",
@@ -39,7 +41,10 @@
     "@types/hapi__joi": "^17.1.6",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.25",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "chai": "^4.3.0",
+    "eslint": "^7.21.0",
     "foreman": "^3.0.1",
     "mocha": "^8.2.1",
     "nodemon": "^1.2.1",

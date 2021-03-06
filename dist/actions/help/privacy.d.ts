@@ -1,2 +1,1 @@
-declare var util: any;
-declare var privacy: any;
+export declare const privacy: (token: any, options: any) => Promise<unknown>;

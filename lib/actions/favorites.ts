@@ -1,7 +1,7 @@
 import util from '../util';
 import Joi  from '@hapi/joi';
 
-var optionsSchema = Joi.object().keys({
+export const optionsSchema = Joi.object().keys({
   screen_name      : Joi.string().min(1),
   user_id          : Joi.string().min(1),
   count            : Joi.number().integer().min(0),
@@ -10,9 +10,4 @@ var optionsSchema = Joi.object().keys({
   include_entities : Joi.boolean(),
 });
 
-var favorites = util.generateApiHandler('favorites/list', optionsSchema);
-
-module.exports = {
-  favorites     : favorites,
-  optionsSchema : optionsSchema,
-};
+export const favorites = util.generateApiHandler('favorites/list', optionsSchema);

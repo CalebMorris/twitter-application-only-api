@@ -4,33 +4,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const token_managed_api_1 = __importDefault(require("../token-managed-api"));
+const list_1 = require("./list");
+const memberships_1 = require("./memberships");
+const ownerships_1 = require("./ownerships");
+const show_1 = require("./show");
+const statuses_1 = require("./statuses");
+const subscriptions_1 = require("./subscriptions");
 class Lists extends token_managed_api_1.default {
     constructor(twit) {
         super(twit);
     }
     list(options) {
-        return require('./list').list.call(this.twit)(this.getToken(), options);
+        return list_1.list.call(this.twit)(this.getToken(), options);
     }
-    ;
     memberships(options) {
-        return require('./memberships').memberships.call(this.twit)(this.getToken(), options);
+        return memberships_1.memberships.call(this.twit)(this.getToken(), options);
     }
-    ;
     ownerships(options) {
-        return require('./ownerships').ownerships.call(this.twit)(this.getToken(), options);
+        return ownerships_1.ownerships.call(this.twit)(this.getToken(), options);
     }
-    ;
     show(options) {
-        return require('./show').show.call(this.twit)(this.getToken(), options);
+        return show_1.show.call(this.twit)(this.getToken(), options);
     }
-    ;
     statuses(options) {
-        return require('./statuses').statuses.call(this.twit)(this.getToken(), options);
+        return statuses_1.statuses.call(this.twit)(this.getToken(), options);
     }
-    ;
     subscriptions(options) {
-        return require('./subscriptions').subscriptions.call(this.twit)(this.getToken(), options);
+        return subscriptions_1.subscriptions.call(this.twit)(this.getToken(), options);
     }
-    ;
 }
 exports.default = Lists;
