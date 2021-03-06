@@ -2,7 +2,7 @@
   "name": "twitter-app-api",
   "version": "0.3.2",
   "description": "Node interropt for application-only Twitter API",
-  "main": "index.js",
+  "main": "./dist/twitterAppApi.js",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -16,8 +16,10 @@
   },
   "scripts": {
     "coverage": "nyc --all mocha --recursive",
-    "test": "mocha --recursive",
-    "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'"
+    "test": "mocha --trace-warnings --require ts-node/register ./test/**/*.spec.ts",
+    "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'",
+    "build": "tsc",
+    "clean": "rm -Rf ./dist"
   },
   "author": {
     "name": "Caleb Morris",
@@ -33,11 +35,18 @@
   },
   "readmeFilename": "README.md",
   "devDependencies": {
-    "chai": "^1.10.0",
-    "mocha": "^7.2.0",
+    "@types/chai": "^4.2.14",
+    "@types/hapi__joi": "^17.1.6",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.25",
+    "chai": "^4.3.0",
+    "foreman": "^3.0.1",
+    "mocha": "^8.2.1",
     "nodemon": "^1.2.1",
     "nyc": "^15.1.0",
-    "proxyquire": "~1.1.0",
-    "sinon": "~1.12.1"
+    "sinon": "~1.12.1",
+    "ts-node": "^9.1.1",
+    "twitter-d": "^0.4.0",
+    "typescript": "^4.1.3"
   }
 }
