@@ -1,18 +1,21 @@
-import TokenManagedApi from '../token-managed-api';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 import { ids } from './ids';
 import { list } from './list';
 
-class Friends extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Friends {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
-  ids(options) {
-    return ids(this.getToken(), options);
+  ids(options: any): Promise<any> {
+    return ids(this.callHandler, options);
   }
   
-  list(options) {
-    return list(this.getToken(), options);
+  list(options: any): Promise<any> {
+    return list(this.callHandler, options);
   }
 }
 

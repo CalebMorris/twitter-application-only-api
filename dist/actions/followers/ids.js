@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ids = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     screen_name: joi_1.default.string().min(1),
@@ -13,4 +12,7 @@ exports.optionsSchema = joi_1.default.object().keys({
     stringify_ids: joi_1.default.boolean(),
     count: joi_1.default.number().integer().min(0),
 }).or('screen_name', 'user_id');
-exports.ids = util_1.default.generateApiHandler('followers/ids', exports.optionsSchema);
+function ids(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('followers/ids', options, exports.optionsSchema);
+}
+exports.ids = ids;

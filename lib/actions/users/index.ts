@@ -1,18 +1,21 @@
-import TokenManagedApi from '../token-managed-api';
 import { show } from './show';
 import { lookup } from './lookup';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-class Users extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Users {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
-  show(options) {
-    return show.call(this.twit)(this.getToken(), options);
+  show(options): Promise<any> {
+    return show(this.callHandler, options);
   }
 
-  lookup(options) {
-    return lookup.call(this.twit)(this.getToken(), options);
+  lookup(options): Promise<any> {
+    return lookup(this.callHandler, options);
   }
 
 }

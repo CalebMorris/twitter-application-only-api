@@ -1,6 +1,7 @@
 /// <reference types="hapi__joi" />
-import { Status as Tweet } from 'twitter-d';
 import Joi from '@hapi/joi';
+import { Status as Tweet } from 'twitter-d';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 export interface RetweetsOptions {
     id: string;
     count?: number;
@@ -10,4 +11,4 @@ export interface RetweetsResults {
     [index: number]: Tweet;
 }
 export declare const optionsSchema: Joi.ObjectSchema<any>;
-export declare const retweets: () => (token: string, options: RetweetsOptions) => Promise<RetweetsResults>;
+export declare function retweets(callHandler: AuthenticatedTwitterCallHandler, options: RetweetsOptions): Promise<RetweetsResults>;

@@ -1,6 +1,6 @@
-import { Cursor } from '../../shared-types/cursor';
-import util from '../../util';
 import Joi from '@hapi/joi';
+import { Cursor } from '../../shared-types/cursor';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 export interface RetweetersOptions {
   id             : string,
@@ -20,9 +20,6 @@ export const optionsSchema = Joi.object().keys({
   stringify_ids : Joi.boolean(),
 });
 
-export const retweeters = function(): (token: string, options: RetweetersOptions) => Promise<RetweetersResults> {
-  return util.generateApiHandler<RetweetersResults>(
-    'statuses/retweeters/ids',
-    optionsSchema
-  );
-};
+export function retweeters(callHandler: AuthenticatedTwitterCallHandler, options: RetweetersOptions): Promise<RetweetersResults> {
+  return callHandler.callTwitterApiWithSchema('statuses/retweeters/ids', options, optionsSchema);
+}

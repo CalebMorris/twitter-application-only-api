@@ -1,6 +1,7 @@
 /// <reference types="hapi__joi" />
-import { Cursor } from '../../shared-types/cursor';
 import Joi from '@hapi/joi';
+import { Cursor } from '../../shared-types/cursor';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 export interface RetweetersOptions {
     id: string;
     count?: number;
@@ -11,4 +12,4 @@ export interface RetweetersResults extends Cursor {
     ids: string[] | number[];
 }
 export declare const optionsSchema: Joi.ObjectSchema<any>;
-export declare const retweeters: () => (token: string, options: RetweetersOptions) => Promise<RetweetersResults>;
+export declare function retweeters(callHandler: AuthenticatedTwitterCallHandler, options: RetweetersOptions): Promise<RetweetersResults>;

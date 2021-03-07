@@ -4,13 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.show = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
-// TODO: update with actual params
 exports.optionsSchema = joi_1.default.object().keys({
     id: joi_1.default.string().min(0).required(),
+    trim_user: joi_1.default.boolean(),
+    include_my_retweet: joi_1.default.boolean(),
+    include_entities: joi_1.default.boolean(),
+    include_ext_alt_text: joi_1.default.boolean(),
+    include_card_uri: joi_1.default.boolean(),
 });
-const show = function () {
-    return util_1.default.generateApiHandler('statuses/show', exports.optionsSchema);
-};
+function show(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema(`statuses/show`, options, exports.optionsSchema);
+}
 exports.show = show;

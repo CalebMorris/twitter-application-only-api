@@ -1,11 +1,12 @@
-import TokenManagedApi from '../token-managed-api';
-declare class Lists extends TokenManagedApi {
-    constructor(twit: any);
-    list(options: any): Promise<unknown>;
-    memberships(options: any): Promise<unknown>;
-    ownerships(options: any): Promise<unknown>;
-    show(options: any): Promise<unknown>;
-    statuses(options: any): Promise<unknown>;
-    subscriptions(options: any): Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Lists {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    list(options: any): Promise<any>;
+    memberships(options: any): Promise<any>;
+    ownerships(options: any): Promise<any>;
+    show(options: any): Promise<any>;
+    statuses(options: any): Promise<any>;
+    subscriptions(options: any): Promise<any>;
 }
 export default Lists;

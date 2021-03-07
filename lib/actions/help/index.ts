@@ -1,28 +1,21 @@
-import TokenManagedApi from '../token-managed-api';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 import { configuration } from './configuration';
 import { languages } from './languages';
-import { privacy } from './privacy';
-import { tos } from './tos';
 
-class Help extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Help {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
-  configuration(options) {
-    return configuration(this.getToken(), options);
+  configuration(): Promise<any> {
+    return configuration(this.callHandler);
   }
 
-  languages(options) {
-    return languages(this.getToken(), options);
-  }
-
-  privacy(options) {
-    return privacy(this.getToken(), options);
-  }
-
-  tos(options) {
-    return tos(this.getToken(), options);
+  languages(): Promise<any> {
+    return languages(this.callHandler);
   }
 
 }

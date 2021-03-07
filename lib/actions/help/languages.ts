@@ -1,3 +1,5 @@
-import { generateNoSchemaHandler } from '../../util';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-export const languages = generateNoSchemaHandler('help/languages');
+export function languages(callHandler: AuthenticatedTwitterCallHandler): Promise<any> {
+  return callHandler.callTwitterApi('help/languages');
+}

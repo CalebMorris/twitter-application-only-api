@@ -1,6 +1,6 @@
-import { Status as Tweet } from 'twitter-d';
-import util from '../../util';
 import Joi from '@hapi/joi';
+import { Status as Tweet } from 'twitter-d';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 export interface TimelineOptions {
   screen_name?: string,
@@ -14,9 +14,7 @@ export interface TimelineOptions {
   include_rts?: boolean,
 }
 
-export interface TimelineResults {
-  [index: number]: Tweet,
-}
+export type TimelineResults = Array<Tweet>;
 
 export const optionsSchema = Joi.object().keys({
   screen_name         : Joi.string().min(1),
@@ -30,6 +28,6 @@ export const optionsSchema = Joi.object().keys({
   include_rts         : Joi.boolean()
 }).or('screen_name', 'user_id');
 
-export const timeline = function(): (token: string, options: TimelineOptions) => Promise<TimelineResults> {
-  return util.generateApiHandler<TimelineResults>('statuses/user_timeline', optionsSchema);
-};
+export function timeline(callHandler: AuthenticatedTwitterCallHandler, options: TimelineOptions): Promise<TimelineResults> {
+  return callHandler.callTwitterApiWithSchema('statuses/user_timeline', options, optionsSchema);
+}

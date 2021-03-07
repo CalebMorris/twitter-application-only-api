@@ -1,4 +1,5 @@
 /// <reference types="hapi__joi" />
 import Joi from '@hapi/joi';
-export declare const optionsSchema: Joi.ObjectSchema<any>[];
-export declare const members: () => (token: string, options: any) => Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+export declare const optionsSchema: Joi.AlternativesSchema;
+export declare function members(callHandler: AuthenticatedTwitterCallHandler, options: any): Promise<any>;

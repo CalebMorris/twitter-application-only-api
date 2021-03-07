@@ -1,5 +1,5 @@
-import util    from '../../util';
 import Joi     from '@hapi/joi';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 export const optionsSchema = Joi.object().keys({
   screen_name   : Joi.string().min(1),
@@ -9,4 +9,6 @@ export const optionsSchema = Joi.object().keys({
   stringify_ids : Joi.boolean(),
 }).or('screen_name', 'user_id');
 
-export const ids = util.generateApiHandler('friends/ids', optionsSchema);
+export function ids(callHandler: AuthenticatedTwitterCallHandler, options: any): Promise<any> {
+  return callHandler.callTwitterApiWithSchema('friends/ids', options, optionsSchema);
+}

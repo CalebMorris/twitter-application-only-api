@@ -1,1 +1,2 @@
-export declare const configuration: (token: any, options: any) => Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+export declare function configuration(callHandler: AuthenticatedTwitterCallHandler): Promise<any>;

@@ -1,1 +1,2 @@
-export declare const available: () => (token: any, options: any) => Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+export declare function available(callHandler: AuthenticatedTwitterCallHandler): Promise<any>;

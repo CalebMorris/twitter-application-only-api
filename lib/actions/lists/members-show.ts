@@ -1,7 +1,7 @@
-import util from '../../util';
 import Joi  from '@hapi/joi';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-export const optionsSchema = [
+export const optionsSchema = Joi.alternatives().try(
   Joi.object().keys({
     slug              : Joi.string().required(),
     user_id           : Joi.string(),
@@ -22,8 +22,8 @@ export const optionsSchema = [
     include_entities  : Joi.boolean(),
     skip_status       : Joi.boolean(),
   }).or('user_id', 'screen_name'),
-];
+);
 
-export const show = function() {
-  return util.generateApiHandler.call(this, 'lists/members/show', optionsSchema);
-};
+export function show(callHandler: AuthenticatedTwitterCallHandler, options: any): Promise<any> {
+  return callHandler.callTwitterApiWithSchema('lists/members/show', options, optionsSchema);
+}

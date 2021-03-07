@@ -1,7 +1,8 @@
-import TokenManagedApi from '../token-managed-api';
-declare class Friends extends TokenManagedApi {
-    constructor(twit: any);
-    ids(options: any): Promise<unknown>;
-    list(options: any): Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Friends {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    ids(options: any): Promise<any>;
+    list(options: any): Promise<any>;
 }
 export default Friends;
