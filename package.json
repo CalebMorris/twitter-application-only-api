@@ -1,6 +1,6 @@
 {
   "name": "twitter-app-api",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Node interropt for application-only Twitter API",
   "main": "./dist/twitter-app-api.js",
   "engines": {
