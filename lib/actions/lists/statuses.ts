@@ -10,7 +10,7 @@ const commonSchema = {
   include_rts       : Joi.boolean(),
 };
 
-export const optionsSchema = [
+export const optionsSchema = Joi.alternatives().try(
   Joi.object().keys(_.extend({
     slug              : Joi.string().required(),
     owner_screen_name : Joi.string(),
@@ -19,7 +19,7 @@ export const optionsSchema = [
   Joi.object().keys(_.extend({
     list_id : Joi.string().required(),
   }, commonSchema)),
-];
+);
 
 export const statuses = function() {
   return util.generateApiHandler.call(this, 'lists/statuses', optionsSchema);

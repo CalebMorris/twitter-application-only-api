@@ -10,7 +10,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     lat: joi_1.default.string().required(),
     long: joi_1.default.string().required(),
 });
-const closest = function () {
+exports.closest = function () {
     return util_1.default.generateApiHandler.call(this, 'trends/closest', exports.optionsSchema);
 };
-exports.closest = closest;

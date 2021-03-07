@@ -11,7 +11,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     user_id: joi_1.default.string(),
     reverse: joi_1.default.boolean(),
 });
-const list = function () {
+exports.list = function () {
     return util_1.default.generateApiHandler.call(this, 'lists/list', exports.optionsSchema);
 };
-exports.list = list;

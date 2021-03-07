@@ -13,17 +13,13 @@ const commonSchema = {
     include_entities: joi_1.default.boolean(),
     skip_status: joi_1.default.boolean(),
 };
-exports.optionsSchema = [
-    joi_1.default.object().keys(lodash_1.default.extend({
-        slug: joi_1.default.string().required(),
-        owner_screen_name: joi_1.default.string(),
-        owner_id: joi_1.default.string(),
-    }, commonSchema)).or('owner_screen_name', 'owner_id').or('user_id', 'screen_name'),
-    joi_1.default.object().keys(lodash_1.default.extend({
-        list_id: joi_1.default.string().required(),
-    }, commonSchema)).or('user_id', 'screen_name'),
-];
-const show = function () {
+exports.optionsSchema = joi_1.default.alternatives().try(joi_1.default.object().keys(lodash_1.default.extend({
+    slug: joi_1.default.string().required(),
+    owner_screen_name: joi_1.default.string(),
+    owner_id: joi_1.default.string(),
+}, commonSchema)).or('owner_screen_name', 'owner_id').or('user_id', 'screen_name'), joi_1.default.object().keys(lodash_1.default.extend({
+    list_id: joi_1.default.string().required(),
+}, commonSchema)).or('user_id', 'screen_name'));
+exports.show = function () {
     return util_1.default.generateApiHandler.call(this, 'lists/subscribers/show', exports.optionsSchema);
 };
-exports.show = show;

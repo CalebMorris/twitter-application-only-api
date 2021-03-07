@@ -11,7 +11,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     screen_name: joi_1.default.string(),
     include_entities: joi_1.default.boolean(),
 }).or('user_id', 'screen_name');
-const show = function () {
+exports.show = function () {
     return util_1.default.generateApiHandler.call(this, 'users/show', exports.optionsSchema);
 };
-exports.show = show;

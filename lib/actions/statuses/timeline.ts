@@ -1,5 +1,5 @@
 import { Status as Tweet } from 'twitter-d';
-import util from '../../util';
+import { generateApiHandler } from '../../util';
 import Joi from '@hapi/joi';
 
 export interface TimelineOptions {
@@ -30,6 +30,6 @@ export const optionsSchema = Joi.object().keys({
   include_rts         : Joi.boolean()
 }).or('screen_name', 'user_id');
 
-export const timeline = function(): (token: string, options: TimelineOptions) => Promise<TimelineResults> {
-  return util.generateApiHandler<TimelineResults>('statuses/user_timeline', optionsSchema);
-};
+export function timeline(token: string, options: TimelineOptions): Promise<TimelineResults> {
+  return generateApiHandler<TimelineResults>('statuses/user_timeline', optionsSchema)(token, options);
+}

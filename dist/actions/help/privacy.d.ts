@@ -1,1 +1,1 @@
-export declare const privacy: (token: any, options: any) => Promise<unknown>;
+export declare const privacy: (schema: any, options: any) => Promise<any>;

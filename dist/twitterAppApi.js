@@ -47,13 +47,13 @@ class Twitter {
         return this.token;
     }
     favorites(options) {
-        return favorites_1.favorites(this.getToken(), options);
+        return favorites_1.favorites(this.getToken(), Object.assign(Object.assign({}, this.options), options));
     }
     friendships(options) {
-        return friendships_1.friendships(this.getToken(), options);
+        return friendships_1.friendships(this.getToken(), Object.assign(Object.assign({}, this.options), options));
     }
     search(options) {
-        return search_1.search(this.getToken(), options);
+        return search_1.search(this.getToken(), Object.assign(Object.assign({}, this.options), options));
     }
 }
 exports.Twitter = Twitter;

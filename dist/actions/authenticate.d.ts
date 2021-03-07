@@ -1,1 +1,1 @@
-export declare const authenticate: (getKeys: () => string[], setToken: (string: any) => void) => Promise<string>;
+export declare function authenticate(getKeys: () => string[], setToken: (string: any) => void): Promise<string>;

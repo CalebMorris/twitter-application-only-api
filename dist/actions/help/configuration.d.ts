@@ -1,1 +1,1 @@
-export declare const configuration: (token: any, options: any) => Promise<unknown>;
+export declare const configuration: (schema: any, options: any) => Promise<any>;

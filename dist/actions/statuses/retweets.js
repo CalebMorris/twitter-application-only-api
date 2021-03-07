@@ -11,7 +11,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     count: joi_1.default.number().integer().min(0),
     trim_user: joi_1.default.boolean(),
 });
-const retweets = function () {
+exports.retweets = function () {
     return util_1.default.generateUrlInsertedHandler(['id'], ['statuses/retweets/'], exports.optionsSchema);
 };
-exports.retweets = retweets;

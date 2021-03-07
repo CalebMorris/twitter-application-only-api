@@ -13,7 +13,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     cursor: joi_1.default.string(),
     filter_to_owned_lists: joi_1.default.boolean(),
 }).or('user_id', 'screen_name');
-const memberships = function () {
+exports.memberships = function () {
     return util_1.default.generateApiHandler.call(this, 'lists/memberships', exports.optionsSchema);
 };
-exports.memberships = memberships;

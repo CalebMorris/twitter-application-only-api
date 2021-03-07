@@ -1,7 +1,8 @@
 
 export default abstract class TokenManagedApi {
   twit: {
-    token?: string
+    token?: string,
+    options: any,
   };
 
   constructor(twit) {

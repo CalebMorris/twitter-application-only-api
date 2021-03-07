@@ -1,1 +1,1 @@
-export declare const languages: (token: any, options: any) => Promise<unknown>;
+export declare const languages: (schema: any, options: any) => Promise<any>;

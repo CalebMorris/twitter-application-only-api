@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.timeline = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
+const util_1 = require("../../util");
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     screen_name: joi_1.default.string().min(1),
@@ -17,7 +17,7 @@ exports.optionsSchema = joi_1.default.object().keys({
     contributor_details: joi_1.default.boolean(),
     include_rts: joi_1.default.boolean()
 }).or('screen_name', 'user_id');
-const timeline = function () {
-    return util_1.default.generateApiHandler('statuses/user_timeline', exports.optionsSchema);
-};
+function timeline(token, options) {
+    return util_1.generateApiHandler('statuses/user_timeline', exports.optionsSchema)(token, options);
+}
 exports.timeline = timeline;

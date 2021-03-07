@@ -31,9 +31,9 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "axios": "^0.21.1",
     "bluebird": "^2.4.0",
-    "lodash": "^4.17.15",
-    "request": "^2.51.0"
+    "lodash": "^4.17.15"
   },
   "readmeFilename": "README.md",
   "devDependencies": {

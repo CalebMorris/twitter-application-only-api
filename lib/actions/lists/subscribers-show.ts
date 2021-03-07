@@ -9,7 +9,7 @@ const commonSchema = {
   skip_status       : Joi.boolean(),
 };
 
-export const optionsSchema = [
+export const optionsSchema = Joi.alternatives().try(
   Joi.object().keys(_.extend({
     slug              : Joi.string().required(),
     owner_screen_name : Joi.string(),
@@ -18,7 +18,7 @@ export const optionsSchema = [
   Joi.object().keys(_.extend({
     list_id           : Joi.string().required(),
   }, commonSchema)).or('user_id', 'screen_name'),
-];
+);
 
 export const show = function() {
   return util.generateApiHandler.call(this, 'lists/subscribers/show', optionsSchema);

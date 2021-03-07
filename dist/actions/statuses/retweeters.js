@@ -12,7 +12,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     cursor: joi_1.default.string().min(0),
     stringify_ids: joi_1.default.boolean(),
 });
-const retweeters = function () {
+exports.retweeters = function () {
     return util_1.default.generateApiHandler('statuses/retweeters/ids', exports.optionsSchema);
 };
-exports.retweeters = retweeters;

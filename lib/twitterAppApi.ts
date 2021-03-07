@@ -61,15 +61,15 @@ export class Twitter {
   authenticate = () => authenticate(() => [this.apiKey, this.apiSecret], (x: string) => this.setToken(x));
 
   favorites(options) {
-    return favorites(this.getToken(), options);
+    return favorites(this.getToken(), {...this.options, ...options});
   }
 
   friendships(options) {
-    return friendships(this.getToken(), options);
+    return friendships(this.getToken(), {...this.options, ...options});
   }
 
   search(options) {
-    return search(this.getToken(), options);
+    return search(this.getToken(), {...this.options, ...options});
   }
 
 }

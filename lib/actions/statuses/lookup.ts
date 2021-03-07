@@ -9,9 +9,7 @@ export interface LookupOptions {
   map?              : boolean,
 }
 
-export interface LookupResults {
-  [index: number]: Tweet,
-}
+export type LookupResults = Array<Tweet>
 
 export const optionsSchema = Joi.object().keys({
   id               : Joi.string().required(), // comma separated ids

@@ -16,4 +16,4 @@ export interface TimelineResults {
     [index: number]: Tweet;
 }
 export declare const optionsSchema: Joi.ObjectSchema<any>;
-export declare const timeline: () => (token: string, options: TimelineOptions) => Promise<TimelineResults>;
+export declare function timeline(token: string, options: TimelineOptions): Promise<TimelineResults>;

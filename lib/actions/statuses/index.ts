@@ -11,23 +11,23 @@ class Statuses extends TokenManagedApi {
   }
 
   timeline(options: TimelineOptions): Promise<TimelineResults> {
-    return timeline.call(this.twit)(this.getToken(), options);
+    return timeline(this.getToken(), {...this.twit.options, ...options});
   }
 
   retweets(options: RetweetsOptions): Promise<RetweetsResults> {
-    return retweets.call(this.twit)(this.getToken(), options);
+    return retweets.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
   }
 
   retweeters(options: RetweetersOptions): Promise<RetweetersResults> {
-    return retweeters.call(this.twit)(this.getToken(), options);
+    return retweeters.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
   }
 
   show(options: ShowOptions): Promise<ShowResults> {
-    return show.call(this.twit)(this.getToken(), options);
+    return show.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
   }
 
   lookup(options: LookupOptions): Promise<LookupResults> {
-    return lookup.call(this.twit)(this.getToken(), options);
+    return lookup.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
   }
 }
 

@@ -9,7 +9,6 @@ const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     lang: joi_1.default.string(),
 });
-const suggestions = function () {
+exports.suggestions = function () {
     return util_1.default.generateApiHandler.call(this, 'users/suggestions', exports.optionsSchema);
 };
-exports.suggestions = suggestions;

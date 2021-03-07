@@ -1,90 +1,73 @@
 import _ from 'lodash';
 import assert from 'assert';
-import request from 'request';
+import axios from 'axios';
 import querystring from 'querystring';
 import { tweetModeKey } from './config/tweet-mode';
+import Joi from '@hapi/joi';
 
-function requestCallback(resolve, reject, err, res, body) {
-  if (err) {
-    return reject(err);
-  }
-
-  if (res.statusCode !== 200) {
-    return reject(
-      new Error('Problem retrieving data: ' + JSON.stringify(res))
-    );
-  }
-
-  return resolve(body ? JSON.parse(body) : null);
-}
-
-export function requestHandler(resolve, reject, path, token, options) {
-  assert(_.isFunction(resolve), 'resolve must be a function');
-  assert(_.isFunction(reject), 'reject must be a function');
+export async function requestHandler(path, token, options): Promise<any> {
   assert(_.isString(path), 'path must be a string');
   assert(_.isString(token), 'token must be a string');
   assert(_.isObject(options), 'options must be a options');
 
   options = options || {};
 
-  if (this && this.options && this.options.tweet_mode) {
-    options[tweetModeKey] = this.options.tweet_mode;
+  if (options && options.tweet_mode) {
+    options[tweetModeKey] = options.tweet_mode;
+  // } else {
+  //   throw new Error(`Can't find [tweet_mode] in this[${JSON.stringify(options)}]`); // TODO: remove
   }
 
-  const requestOptions = {
-    url     : 'https://api.twitter.com/1.1/' + path + '.json?' +
-              querystring.stringify(options),
-    method  : 'GET',
-    headers : {
-      'Authorization'  : 'Bearer ' + token,
-      'User-Agent'     : 'request'
-    },
-  };
+  const response = await axios.get(
+    `https://api.twitter.com/1.1/${path}.json?${querystring.stringify(options)}`,
+    {
+      headers: {
+        'Authorization'  : 'Bearer ' + token,
+        'User-Agent'     : 'axios',
+      },
+    }
+  );
 
-  return request.get(requestOptions, requestCallback.bind(this, resolve, reject));
+  if (response.status != 200) {
+    throw new Error('Problem retrieving data: ' + JSON.stringify(response));
+  }
+
+  // console.warn(`DATA: ${response.data}`)
+
+  // return response.data ? JSON.parse(response.data) : null;
+  return response.data;
 }
 
-export function validateOptions(token, schema, options) {
-  assert(_.isString(token), 'token must be a string');
+export function validateOptions(schema: Joi.AnySchema, options): void {
   assert(_.isObject(schema), 'schema must be an object');
   assert(_.isObject(options), 'options must be an object');
 
-  return new Promise<void>((resolve, reject) => {
-    const validationResult = schema.validate(options, {
-      allowUnknown: true
-    });
-    if (validationResult.warning) {
-      console.log(`Validation warning [${validationResult.warning}]`);
-    }
-    if (validationResult.error) {
-      console.log(`Validation error [${validationResult.error}]`);
-      return reject(validationResult.error);
-    }
-
-    return resolve();
+  const validationResult = schema.validate(options, {
+    allowUnknown: true
   });
+  if (validationResult.warning) {
+    console.log(`Validation warning [${validationResult.warning}]`);
+  }
+  if (validationResult.error) {
+    console.log(`Validation error [${validationResult.error}]`);
+    throw validationResult.error;
+  }
 }
 
-function generatedNoSchemaHandler(path, token, options) {
-  return new Promise((resolve, reject) => {
-    requestHandler(resolve, reject, path, token, options);
-  });
+async function generatedNoSchemaHandler(path, token, options) {
+  return await requestHandler(path, token, options);
 }
 
-function generatedApiHandler<TResults>(path: string, schema: any, token: string, options: any) {
-  return new Promise<TResults>((resolve, reject) => {
-    return validateOptions(token, schema, options)
-    .then(() => {
-      requestHandler.call(this, resolve, reject, path, token, options);
-    });
-  });
+async function generatedApiHandler<TResults>(path: string, schema: Joi.AnySchema, token: string, options: any): Promise<TResults> {
+  validateOptions(schema, options);
+  return await requestHandler(path, token, options);
 }
 
-function generateApiHandler<TResults>(path: string, schema: any): (token: string, options: any) => Promise<TResults> {
+export function generateApiHandler<TResults>(path: string, schema: Joi.AnySchema): (token: string, options: any) => Promise<TResults> {
   return (token: string, options: any) => generatedApiHandler<TResults>(path, schema, token, options);
 }
 
-function generateUrlInsertedHandler<TResults>(insertedValueNames, pathInterleves, schema): (token: string, options: any) => Promise<TResults> {
+function generateUrlInsertedHandler<TResults>(insertedValueNames, pathInterleves, schema: Joi.AnySchema): (token: string, options: any) => Promise<TResults> {
   // pathInterleves[i] + options[insertedValueName[i]]
   // ex. /test/2/foo ivn = ['k'], pi = ['test', 'foo'], options={ k : 2 }
 
@@ -94,36 +77,33 @@ function generateUrlInsertedHandler<TResults>(insertedValueNames, pathInterleves
     );
   }
 
-  return function filterOptionsAndContinue(token, options) {
-    return new Promise((resolve, reject) => {
-      return validateOptions(token, schema, options)
-      .then(() => {
-        const insertedValues = _.map(
-          insertedValueNames,
-          function mapValueNameToValue(valueName) {
-            const tmp = options[valueName];
-            delete options[valueName];
-            return tmp;
-          }
-        );
+  return async function filterOptionsAndContinue(token, options) {
+    validateOptions(schema, options);
 
-        let path = '';
-        _.forEach(insertedValues, function(value, index) {
-          path += pathInterleves[index] + '/' + value;
-        });
+    const insertedValues = _.map(
+      insertedValueNames,
+      function mapValueNameToValue(valueName) {
+        const tmp = options[valueName];
+        delete options[valueName];
+        return tmp;
+      }
+    );
 
-        if (pathInterleves.length > insertedValues) {
-          path += '/' + pathInterleves[pathInterleves.length - 1];
-        }
-
-        return requestHandler(resolve, reject, path, token, options).bind(this);
-      });
+    let path = '';
+    _.forEach(insertedValues, function(value, index) {
+      path += pathInterleves[index] + '/' + value;
     });
+
+    if (pathInterleves.length > insertedValues) {
+      path += '/' + pathInterleves[pathInterleves.length - 1];
+    }
+
+    return await requestHandler(path, token, options);
   };
 }
 
 export function generateNoSchemaHandler(path) {
-  return generatedNoSchemaHandler.bind(this, path);
+  return async (schema, options) => await generatedNoSchemaHandler(path, schema, options);
 }
 
 export default {
@@ -131,8 +111,4 @@ export default {
   generateNoSchemaHandler : generateNoSchemaHandler,
   generateUrlInsertedHandler : generateUrlInsertedHandler,
   generatedApiHandler : generatedApiHandler,
-  generatedNoSchemaHandler : generatedNoSchemaHandler,
-  requestCallback : requestCallback,
-  requestHandler : requestHandler,
-  validateOptions : validateOptions,
 };

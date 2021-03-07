@@ -12,7 +12,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     include_entities: joi_1.default.boolean(),
     tweet_mode: joi_1.default.string(),
 });
-const lookup = function () {
+exports.lookup = function () {
     return util_1.default.generateApiHandler.call(this, 'users/lookup', exports.optionsSchema);
 };
-exports.lookup = lookup;

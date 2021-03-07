@@ -10,7 +10,6 @@ const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     id: joi_1.default.string().min(0).required(),
 });
-const show = function () {
+exports.show = function () {
     return util_1.default.generateApiHandler('statuses/show', exports.optionsSchema);
 };
-exports.show = show;

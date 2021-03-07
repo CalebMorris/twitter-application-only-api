@@ -11,7 +11,6 @@ exports.optionsSchema = joi_1.default.object().keys({
 });
 //FIX THIS.
 //SCHEMA MUST BE CHECKED BEFORE REMOVED FROM OPTIONS TO JOIN PATH
-const members = function () {
+exports.members = function () {
     return util_1.default.generateUrlInsertedHandler.call(this, ['slug'], ['users/suggestions/', '/members'], exports.optionsSchema);
 };
-exports.members = members;

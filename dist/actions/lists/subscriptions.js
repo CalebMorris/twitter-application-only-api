@@ -12,7 +12,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     count: joi_1.default.number().integer(),
     cursor: joi_1.default.string(),
 }).or('user_id', 'screen_name');
-const subscriptions = function () {
+exports.subscriptions = function () {
     return util_1.default.generateApiHandler.call(this, 'lists/subscriptions', exports.optionsSchema);
 };
-exports.subscriptions = subscriptions;

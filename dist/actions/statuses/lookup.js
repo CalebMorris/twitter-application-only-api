@@ -12,7 +12,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     trim_user: joi_1.default.boolean(),
     map: joi_1.default.boolean(),
 });
-const lookup = function () {
+exports.lookup = function () {
     return util_1.default.generateApiHandler('statuses/lookup', exports.optionsSchema);
 };
-exports.lookup = lookup;

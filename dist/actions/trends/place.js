@@ -10,7 +10,6 @@ exports.optionsSchema = joi_1.default.object().keys({
     id: joi_1.default.string().required(),
     exclude: joi_1.default.string().valid('hashtags'),
 });
-const place = function () {
+exports.place = function () {
     return util_1.default.generateApiHandler.call(this, 'trends/place', exports.optionsSchema);
 };
-exports.place = place;
