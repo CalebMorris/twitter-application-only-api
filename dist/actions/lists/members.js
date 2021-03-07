@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.members = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.alternatives().try(joi_1.default.object().keys({
     slug: joi_1.default.string().required(),
@@ -21,6 +20,7 @@ exports.optionsSchema = joi_1.default.alternatives().try(joi_1.default.object().
     include_entities: joi_1.default.boolean(),
     skip_status: joi_1.default.boolean(),
 }));
-exports.members = function () {
-    return util_1.default.generateApiHandler.call(this, 'lists/members', exports.optionsSchema);
-};
+function members(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('lists/members', options, exports.optionsSchema);
+}
+exports.members = members;

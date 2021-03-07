@@ -3,9 +3,10 @@ import { RetweetsOptions, RetweetsResults } from './retweets';
 import { RetweetersOptions, RetweetersResults } from './retweeters';
 import { LookupOptions, LookupResults } from './lookup';
 import { ShowOptions, ShowResults } from './show';
-import TokenManagedApi from '../token-managed-api';
-declare class Statuses extends TokenManagedApi {
-    constructor(twit: any);
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Statuses {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
     timeline(options: TimelineOptions): Promise<TimelineResults>;
     retweets(options: RetweetsOptions): Promise<RetweetsResults>;
     retweeters(options: RetweetersOptions): Promise<RetweetersResults>;

@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.lookup = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     screen_name: joi_1.default.array().items(joi_1.default.string()).max(100),
@@ -12,6 +11,7 @@ exports.optionsSchema = joi_1.default.object().keys({
     include_entities: joi_1.default.boolean(),
     tweet_mode: joi_1.default.string(),
 });
-exports.lookup = function () {
-    return util_1.default.generateApiHandler.call(this, 'users/lookup', exports.optionsSchema);
-};
+function lookup(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('users/lookup', options, exports.optionsSchema);
+}
+exports.lookup = lookup;

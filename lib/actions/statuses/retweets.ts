@@ -1,6 +1,6 @@
-import { Status as Tweet } from 'twitter-d';
-import util from '../../util';
 import Joi from '@hapi/joi';
+import { Status as Tweet } from 'twitter-d';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 export interface RetweetsOptions {
   id         : string,
@@ -18,10 +18,8 @@ export const optionsSchema = Joi.object().keys({
   trim_user : Joi.boolean(),
 });
 
-export const retweets = function(): (token: string, options: RetweetsOptions) => Promise<RetweetsResults> {
-  return util.generateUrlInsertedHandler<RetweetsResults>(
-    [ 'id' ],
-    [ 'statuses/retweets/' ],
-    optionsSchema
-  );
-};
+export function retweets(callHandler: AuthenticatedTwitterCallHandler, options: RetweetsOptions): Promise<RetweetsResults> {
+  callHandler.validateOptions(options, optionsSchema);
+  const {id, ...queryParamsOptions} = options;
+  return callHandler.callTwitterApi(`statuses/retweets/${id}`, queryParamsOptions);
+}

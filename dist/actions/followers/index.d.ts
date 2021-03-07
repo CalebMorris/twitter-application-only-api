@@ -1,7 +1,8 @@
-import TokenManagedApi from '../token-managed-api';
-declare class Followers extends TokenManagedApi {
-    constructor(twit: any);
-    ids(options: any): Promise<unknown>;
-    list(options: any): Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Followers {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    ids(options: any): Promise<any>;
+    list(options: any): Promise<any>;
 }
 export default Followers;

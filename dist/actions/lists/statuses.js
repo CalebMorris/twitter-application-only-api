@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.statuses = exports.optionsSchema = void 0;
 const lodash_1 = __importDefault(require("lodash"));
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 const commonSchema = {
     since_id: joi_1.default.string(),
@@ -21,6 +20,7 @@ exports.optionsSchema = joi_1.default.alternatives().try(joi_1.default.object().
 }, commonSchema)).or('owner_screen_name', 'owner_id'), joi_1.default.object().keys(lodash_1.default.extend({
     list_id: joi_1.default.string().required(),
 }, commonSchema)));
-exports.statuses = function () {
-    return util_1.default.generateApiHandler.call(this, 'lists/statuses', exports.optionsSchema);
-};
+function statuses(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('lists/statuses', options, exports.optionsSchema);
+}
+exports.statuses = statuses;

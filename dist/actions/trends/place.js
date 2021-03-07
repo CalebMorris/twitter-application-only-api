@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.place = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     id: joi_1.default.string().required(),
     exclude: joi_1.default.string().valid('hashtags'),
 });
-exports.place = function () {
-    return util_1.default.generateApiHandler.call(this, 'trends/place', exports.optionsSchema);
-};
+function place(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('trends/place', options, exports.optionsSchema);
+}
+exports.place = place;

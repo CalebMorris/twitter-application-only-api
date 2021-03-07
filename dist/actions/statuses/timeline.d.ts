@@ -1,6 +1,7 @@
 /// <reference types="hapi__joi" />
-import { Status as Tweet } from 'twitter-d';
 import Joi from '@hapi/joi';
+import { Status as Tweet } from 'twitter-d';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 export interface TimelineOptions {
     screen_name?: string;
     user_id?: number;
@@ -12,8 +13,6 @@ export interface TimelineOptions {
     contributor_details?: boolean;
     include_rts?: boolean;
 }
-export interface TimelineResults {
-    [index: number]: Tweet;
-}
+export declare type TimelineResults = Array<Tweet>;
 export declare const optionsSchema: Joi.ObjectSchema<any>;
-export declare function timeline(token: string, options: TimelineOptions): Promise<TimelineResults>;
+export declare function timeline(callHandler: AuthenticatedTwitterCallHandler, options: TimelineOptions): Promise<TimelineResults>;

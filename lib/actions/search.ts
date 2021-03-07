@@ -1,5 +1,5 @@
-import util from '../util';
 import Joi  from '@hapi/joi';
+import { AuthenticatedTwitterCallHandler } from '../twitter-call-handler';
 
 export const optionsSchema = Joi.object().keys({
   q           : Joi.string().min(1).required(),
@@ -12,4 +12,6 @@ export const optionsSchema = Joi.object().keys({
   max_id      : Joi.string().min(1),
 });
 
-export const search = util.generateApiHandler('search/tweets', optionsSchema);
+export function search(callHandler: AuthenticatedTwitterCallHandler, options: any): Promise<any> {
+  return callHandler.callTwitterApiWithSchema('search/tweets', options, optionsSchema);
+}

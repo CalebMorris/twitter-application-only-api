@@ -12,22 +12,27 @@ This package is only written to work against the [Twitter v1.1 API](https://deve
 
 ## Example
 ```javascript
-var Twitter  = require('twitter-app-api');
+import Twitter from 'twitter-app-api'.Twitter;
 
-var twit = new Twitter(config.apiKey, config.apiSecret);
+async function init() {
+  console.log('Authenticating client against Twitter API v1.1');
+  let twit;
+  try {
+    twit = await Twitter.authenticate(process.env.TWITTER_API_KEY, process.env.TWITTER_API_SECRET, { tweet_mode: 'extended' });
+  } catch(err) {
+    console.error(err.message);
+    console.error(err.body);
+    process.exit(2);
+  }
+  console.log('Authentication completed');
 
-twit.authenticate()
-.then(function() {
-  console.log('Authenticated');
-
-  twit.statuses.timeline({ screen_name:'twitterapi', count:2 })
-  .then(function(tweets) {
-    tweets.forEach(function(twit) {
-      console.log(twit.text);
-    })
+  const tweets = await twit.statuses.timeline({ screen_name:'twitterapi', count:2 });
+  tweets.forEach(function(twit) {
+    console.log(twit.text);
   });
-});
 
+  // Do other stuff with the client
+}
 ```
 
 ## API

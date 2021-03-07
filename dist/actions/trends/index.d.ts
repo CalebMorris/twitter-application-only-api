@@ -1,8 +1,9 @@
-import TokenManagedApi from '../token-managed-api';
-declare class Trends extends TokenManagedApi {
-    constructor(twit: any);
-    available(options: any): Promise<any>;
-    closest(options: any): Promise<unknown>;
-    place(options: any): Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Trends {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    available(): Promise<any>;
+    closest(options: any): Promise<any>;
+    place(options: any): Promise<any>;
 }
 export default Trends;

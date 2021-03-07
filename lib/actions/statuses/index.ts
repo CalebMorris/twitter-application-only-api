@@ -3,31 +3,35 @@ import { retweets, RetweetsOptions, RetweetsResults} from './retweets';
 import { retweeters, RetweetersOptions, RetweetersResults} from './retweeters';
 import { lookup, LookupOptions, LookupResults } from './lookup';
 import { show, ShowOptions, ShowResults } from './show';
-import TokenManagedApi from '../token-managed-api';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-class Statuses extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Statuses {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
+
   timeline(options: TimelineOptions): Promise<TimelineResults> {
-    return timeline(this.getToken(), {...this.twit.options, ...options});
+    return timeline(this.callHandler, options);
   }
 
   retweets(options: RetweetsOptions): Promise<RetweetsResults> {
-    return retweets.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
+    return retweets(this.callHandler, options);
   }
 
   retweeters(options: RetweetersOptions): Promise<RetweetersResults> {
-    return retweeters.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
+    return retweeters(this.callHandler, options);
   }
 
   show(options: ShowOptions): Promise<ShowResults> {
-    return show.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
+    return show(this.callHandler, options);
   }
 
   lookup(options: LookupOptions): Promise<LookupResults> {
-    return lookup.call(this.twit)(this.getToken(), {...this.twit.options, ...options});
+    return lookup(this.callHandler, options);
   }
 }
 

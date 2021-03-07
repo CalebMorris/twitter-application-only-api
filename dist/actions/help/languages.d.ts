@@ -1,1 +1,2 @@
-export declare const languages: (schema: any, options: any) => Promise<any>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+export declare function languages(callHandler: AuthenticatedTwitterCallHandler): Promise<any>;

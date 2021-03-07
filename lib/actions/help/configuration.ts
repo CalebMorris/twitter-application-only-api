@@ -1,3 +1,5 @@
-import { generateNoSchemaHandler } from '../../util';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-export const configuration = generateNoSchemaHandler('help/configuration');
+export function configuration(callHandler: AuthenticatedTwitterCallHandler): Promise<any> {
+  return callHandler.callTwitterApi('help/configuration');
+}

@@ -1,23 +1,26 @@
-import TokenManagedApi from '../token-managed-api';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 import { available } from './available';
 import { closest } from './closest';
 import { place } from './place';
 
-class Trends extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Trends {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
-  available(options) {
-    return available.call(this.twit)(this.getToken(), options);
+  available(): Promise<any> {
+    return available(this.callHandler);
   }
 
-  closest(options) {
-    return closest.call(this.twit)(this.getToken(), options);
+  closest(options): Promise<any> {
+    return closest(this.callHandler, options);
   }
 
-  place(options) {
-    return place.call(this.twit)(this.getToken(), options);
+  place(options): Promise<any> {
+    return place(this.callHandler, options);
   }
 
 }

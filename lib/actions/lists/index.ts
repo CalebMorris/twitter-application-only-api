@@ -1,4 +1,4 @@
-import TokenManagedApi from '../token-managed-api';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 import { list } from './list';
 import { memberships } from './memberships';
 import { ownerships } from './ownerships';
@@ -6,33 +6,37 @@ import { show } from './show';
 import { statuses } from './statuses';
 import { subscriptions } from './subscriptions';
 
-class Lists extends TokenManagedApi {
-  constructor(twit) {
-    super(twit);
+class Lists {
+
+  callHandler: AuthenticatedTwitterCallHandler
+
+  constructor(callHandler: AuthenticatedTwitterCallHandler) {
+    this.callHandler = callHandler;
   }
 
+
   list(options) {
-    return list.call(this.twit)(this.getToken(), options);
+    return list(this.callHandler, options);
   }
 
   memberships(options) {
-    return memberships.call(this.twit)(this.getToken(), options);
+    return memberships(this.callHandler, options);
   }
 
   ownerships(options) {
-    return ownerships.call(this.twit)(this.getToken(), options);
+    return ownerships(this.callHandler, options);
   }
 
   show(options) {
-    return show.call(this.twit)(this.getToken(), options);
+    return show(this.callHandler, options);
   }
 
   statuses(options) {
-    return statuses.call(this.twit)(this.getToken(), options);
+    return statuses(this.callHandler, options);
   }
 
   subscriptions(options) {
-    return subscriptions.call(this.twit)(this.getToken(), options);
+    return subscriptions(this.callHandler, options);
   }
 
 }

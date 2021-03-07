@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.closest = exports.optionsSchema = void 0;
-const util_1 = __importDefault(require("../../util"));
 const joi_1 = __importDefault(require("@hapi/joi"));
 exports.optionsSchema = joi_1.default.object().keys({
     lat: joi_1.default.string().required(),
     long: joi_1.default.string().required(),
 });
-exports.closest = function () {
-    return util_1.default.generateApiHandler.call(this, 'trends/closest', exports.optionsSchema);
-};
+function closest(callHandler, options) {
+    return callHandler.callTwitterApiWithSchema('trends/closest', options, exports.optionsSchema);
+}
+exports.closest = closest;

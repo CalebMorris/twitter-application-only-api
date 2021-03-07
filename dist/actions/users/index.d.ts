@@ -1,7 +1,8 @@
-import TokenManagedApi from '../token-managed-api';
-declare class Users extends TokenManagedApi {
-    constructor(twit: any);
-    show(options: any): Promise<unknown>;
-    lookup(options: any): Promise<unknown>;
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
+declare class Users {
+    callHandler: AuthenticatedTwitterCallHandler;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    show(options: any): Promise<any>;
+    lookup(options: any): Promise<any>;
 }
 export default Users;

@@ -1,5 +1,5 @@
-import util from '../../util';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
-export const available = function() {
-  return util.generateNoSchemaHandler.call(this, 'trends/available');
-};
+export function available(callHandler: AuthenticatedTwitterCallHandler): Promise<any> {
+  return callHandler.callTwitterApi('trends/available');
+}

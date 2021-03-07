@@ -5,11 +5,9 @@ import Lists from './actions/lists';
 import Statuses from './actions/statuses';
 import Trends from './actions/trends';
 import Users from './actions/users';
+import { AuthenticatedTwitterCallHandler, GlobalOptions } from './twitter-call-handler';
 export declare class Twitter {
-    apiKey: string;
-    apiSecret: string;
-    options: any;
-    token?: string;
+    callHandler: AuthenticatedTwitterCallHandler;
     followers: Followers;
     friends: Friends;
     help: Help;
@@ -17,11 +15,9 @@ export declare class Twitter {
     statuses: Statuses;
     trends: Trends;
     users: Users;
-    constructor(apiKey: string, apiSecret: string, options: any);
-    private setToken;
-    private getToken;
-    authenticate: () => Promise<string>;
-    favorites(options: any): Promise<unknown>;
-    friendships(options: any): Promise<unknown>;
-    search(options: any): Promise<unknown>;
+    static authenticate(apiKey: string, apiSecret: string, globalOptions?: GlobalOptions): Promise<Twitter>;
+    constructor(callHandler: AuthenticatedTwitterCallHandler);
+    favorites(options: any): Promise<any>;
+    friendships(options: any): Promise<any>;
+    search(options: any): Promise<any>;
 }

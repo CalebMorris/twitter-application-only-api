@@ -1,6 +1,6 @@
-import { Status as Tweet } from 'twitter-d';
-import util from '../../util';
 import Joi from '@hapi/joi';
+import { Status as Tweet } from 'twitter-d';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 export interface LookupOptions {
   id                : string,
@@ -18,6 +18,6 @@ export const optionsSchema = Joi.object().keys({
   map              : Joi.boolean(),
 });
 
-export const lookup = function(): (token: string, options: LookupOptions) => Promise<LookupResults> {
-  return util.generateApiHandler<LookupResults>('statuses/lookup', optionsSchema);
-};
+export function lookup(callHandler: AuthenticatedTwitterCallHandler, options: LookupOptions): Promise<LookupResults> {
+  return callHandler.callTwitterApiWithSchema('statuses/lookup', options, optionsSchema);
+}

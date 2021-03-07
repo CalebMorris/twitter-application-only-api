@@ -1,6 +1,6 @@
 import _    from 'lodash';
-import util from '../../util';
 import Joi  from '@hapi/joi';
+import { AuthenticatedTwitterCallHandler } from '../../twitter-call-handler';
 
 const commonSchema = {
   since_id          : Joi.string(),
@@ -21,6 +21,6 @@ export const optionsSchema = Joi.alternatives().try(
   }, commonSchema)),
 );
 
-export const statuses = function() {
-  return util.generateApiHandler.call(this, 'lists/statuses', optionsSchema);
-};
+export function statuses(callHandler: AuthenticatedTwitterCallHandler, options: any): Promise<any> {
+  return callHandler.callTwitterApiWithSchema('lists/statuses', options, optionsSchema);
+}
