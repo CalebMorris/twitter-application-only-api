@@ -21,6 +21,7 @@
     "_test-integration": "mocha --trace-warnings --require ts-node/register ./test/**/*.integration.ts",
     "watch-test": "./node_modules/.bin/nodemon --exec 'npm test'",
     "build": "tsc",
+    "build-release": "npm run clean && npm run build && npm run lint-quiet && npm run test",
     "clean": "rm -Rf ./dist",
     "lint": "eslint . --ext .ts",
     "lint-quiet": "eslint . --ext .ts --quiet"
