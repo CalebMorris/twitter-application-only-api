@@ -11,9 +11,9 @@ const lists_1 = __importDefault(require("./actions/lists"));
 const statuses_1 = __importDefault(require("./actions/statuses"));
 const trends_1 = __importDefault(require("./actions/trends"));
 const users_1 = __importDefault(require("./actions/users"));
+const search_1 = __importDefault(require("./actions/search"));
 const favorites_1 = require("./actions/favorites");
 const friendships_1 = require("./actions/friendships");
-const search_1 = require("./actions/search");
 const twitter_call_handler_1 = require("./twitter-call-handler");
 class Twitter {
     constructor(callHandler) {
@@ -25,6 +25,7 @@ class Twitter {
         this.statuses = new statuses_1.default(callHandler);
         this.trends = new trends_1.default(callHandler);
         this.users = new users_1.default(callHandler);
+        this.search = new search_1.default(callHandler);
     }
     static authenticate(apiKey, apiSecret, globalOptions = {}) {
         console.log(`Twitter(globalOptions=${JSON.stringify(globalOptions)})`);
@@ -36,9 +37,6 @@ class Twitter {
     }
     friendships(options) {
         return friendships_1.friendships(this.callHandler, options);
-    }
-    search(options) {
-        return search_1.search(this.callHandler, options);
     }
 }
 exports.Twitter = Twitter;
